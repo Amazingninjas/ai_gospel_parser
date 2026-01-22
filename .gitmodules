@@ -1,0 +1,9 @@
+[submodule "LXX-Swete"]
+	path = LXX-Swete
+	url = https://github.com/sleeptillseven/LXX-Swete.git
+[submodule "sblgnt"]
+	path = sblgnt
+	url = https://github.com/morphgnt/sblgnt.git
+[submodule "strongs"]
+	path = strongs
+	url = https://github.com/openscriptures/strongs.git

@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Environment Variables (contains API keys)
+.env
+
+# ChromaDB (vector database - can be regenerated)
+chroma_db/
+chroma_db_interlinear/
+
+# Installation Logs
+install_log.txt
+install_logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large source texts (optional - uncomment if you want to track them)
+# LXX-Swete/
+# sblgnt/
+# strongs/
+# strongsgreek.xml
+
+# Generated files that can be rebuilt
+enhanced_lexicon.json
+
+# Downloaded Bible data (can be re-downloaded)
+web_bible_json/
+
+# get-pip.py (can be re-downloaded)
+get-pip.py

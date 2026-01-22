@@ -1,0 +1,431 @@
+================================================================================
+AI GOSPEL PARSER - GETTING STARTED GUIDE
+================================================================================
+
+Welcome to the AI Gospel Parser! This tool allows you to study the Greek New
+Testament with AI-powered analysis that focuses exclusively on the original
+Greek text.
+
+NOTE: If you haven't installed yet, see README.txt for simple installation
+instructions. This guide assumes you've already completed installation.
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+1. What You Have Installed
+2. Text Sources & Attributions
+3. How to Launch
+4. Basic Usage
+5. All Commands & Features
+6. AI Provider Information
+7. Troubleshooting
+8. Support & Bug Reports
+9. Future Roadmap
+
+================================================================================
+1. WHAT YOU HAVE INSTALLED
+================================================================================
+
+✓ Greek New Testament (SBLGNT) - 27 books with morphological tagging
+✓ World English Bible (WEB) - English reference layer
+✓ Strong's Greek Lexicon - Greek word definitions
+✓ ChromaDB - Vector database for semantic search
+✓ AI Provider - Either Ollama (local) or Google Gemini (API)
+
+================================================================================
+2. TEXT SOURCES & ATTRIBUTIONS
+================================================================================
+
+PRIMARY GREEK TEXT:
+-------------------
+Source: MorphGNT SBLGNT v6.12 (2017)
+Base Text: Society of Biblical Literature Greek New Testament (SBLGNT)
+Editor: Michael W. Holmes
+Repository: https://github.com/morphgnt/sblgnt
+License: SBLGNT text (SBLGNT EULA), morphology (CC-BY-SA)
+
+About SBLGNT:
+- Modern critical edition of the Greek New Testament
+- Published by the Society of Biblical Literature
+- Uses latest manuscript discoveries and critical apparatuses
+- Differs from Nestle-Aland/UBS in over 540 variation units
+- Freely available for research and education
+
+About MorphGNT:
+- Adds comprehensive morphological tagging to SBLGNT text
+- Every word tagged with: part of speech, parsing codes, lemma
+- Community-maintained project (136+ GitHub stars)
+- Tab-separated format for easy parsing
+- Latest stable release: v6.12 (2017)
+
+Official Links:
+- SBL Greek New Testament: https://sblgnt.com/
+- SBL Organization: https://www.sbl-site.org/
+- MorphGNT Project: https://github.com/morphgnt/sblgnt
+- Source Files (Logos): https://github.com/LogosBible/SBLGNT
+
+ENGLISH REFERENCE TEXT:
+-----------------------
+Source: World English Bible (WEB) - JSON Edition
+Repository: https://github.com/TehShrike/world-english-bible
+License: Public Domain (no copyright restrictions)
+
+About WEB:
+- Modern English translation
+- Freely available for any use (public domain)
+- Clean JSON format with verse-by-verse structure
+- 7,953 verses covering all 27 New Testament books
+- Used ONLY for reference/navigation (not AI analysis)
+
+Why WEB?
+- Cleanest digital format available (structured JSON)
+- Public domain (no licensing concerns)
+- Modern, readable English
+- Sufficient for verse identification and navigation
+- Translation differences vs. Greek can be educational
+
+Official Links:
+- TehShrike WEB JSON: https://github.com/TehShrike/world-english-bible
+- Official WEB Site: https://worldenglish.bible/
+- eBible.org: https://ebible.org/eng-web/
+
+LEXICON:
+--------
+Source: Strong's Greek Lexicon (Thayer's)
+File: strongsgreek.xml
+License: Public Domain
+
+About Strong's:
+- Standard reference for Greek word definitions
+- Links Greek words to Strong's numbers (e.g., G26 = ἀγάπη)
+- Includes KJV definitions and Thayer's expanded definitions
+- Widely used in Biblical scholarship
+
+IMPORTANT NOTE ON TEXT USAGE:
+------------------------------
+The English text (WEB) is displayed to YOU for reference and navigation, but
+the AI NEVER sees or analyzes it. The AI responds based EXCLUSIVELY on the
+Greek text (SBLGNT). This ensures scholarly rigor and Greek-first analysis.
+
+Translation differences between WEB and Greek become teaching opportunities
+rather than analytical compromises!
+
+================================================================================
+3. HOW TO LAUNCH
+================================================================================
+
+DESKTOP SHORTCUT (Recommended):
+--------------------------------
+Double-click the "AI Gospel Parser" shortcut on your desktop.
+
+MANUAL LAUNCH:
+--------------
+Windows:
+  1. Open Command Prompt
+  2. cd "path\to\ai_gospel_parser"
+  3. venv\Scripts\activate
+  4. python gospel_parser_interlinear.py
+
+macOS/Linux:
+  1. Open Terminal
+  2. cd "path/to/ai_gospel_parser"
+  3. source venv/bin/activate
+  4. python3 gospel_parser_interlinear.py
+
+================================================================================
+4. BASIC USAGE
+================================================================================
+
+STARTING THE PROGRAM:
+---------------------
+When you launch, you'll see:
+  - AI provider connection status
+  - Ready prompt
+
+LOOKING UP VERSES:
+------------------
+Just type a Bible reference:
+
+  > John 3:16
+  > Romans 8:28
+  > 1 John 4:8
+  > Matthew 5:1-10
+
+Output shows Greek and English side-by-side:
+  --- John 3:16 ---
+  Greek:   Οὕτως γὰρ ἠγάπησεν ὁ θεὸς τὸν κόσμον...
+  English: For God so loved the world...
+
+The program will ask if you want AI analysis of the verse.
+
+ASKING QUESTIONS:
+-----------------
+Ask any question about the Greek text:
+
+  > What does agape mean in 1 John 4:8?
+  > Explain the grammar of John 1:1
+  > What is the significance of logos in John 1:14?
+  > Compare agape and phileo
+  > Define Strong's G26
+
+The AI searches for relevant Greek context and responds based ONLY on the
+Greek text.
+
+CONVERSATION MEMORY:
+--------------------
+The AI remembers your conversation, so you can ask follow-up questions:
+
+  > What does John 1:1 say about Jesus?
+  [AI responds with Greek analysis]
+  > What's the significance of "was" in that verse?
+  [AI remembers we're discussing John 1:1]
+
+================================================================================
+5. ALL COMMANDS & FEATURES
+================================================================================
+
+VERSE REFERENCE FORMATS:
+------------------------
+Full book names:
+  > John 3:16
+  > Romans 8:1
+  > 1 Corinthians 13:4
+
+Abbreviated book names:
+  > Jn 3:16
+  > Rom 8:1
+  > 1Co 13:4
+
+Verse ranges:
+  > John 1:1-5
+  > Romans 8:28-30
+  > Matthew 5:1-12
+
+SPECIAL COMMANDS:
+-----------------
+quit      - Exit the program
+clear     - Clear conversation history (fresh start)
+
+QUESTION TYPES:
+---------------
+Word studies:
+  > What does [Greek word] mean?
+  > Define Strong's [number]
+  > Show me Greek words for love
+
+Grammar questions:
+  > Explain the grammar of [verse]
+  > What tense is [verb] in [verse]?
+  > Why is the word order [specific] in [verse]?
+
+Theological questions:
+  > What does [verse] say about [topic]?
+  > How does [verse] relate to [concept]?
+  > Compare [verse1] with [verse2]
+
+Contextual questions:
+  > What's the context of [verse]?
+  > What comes before/after [verse]?
+
+SUPPORTED BOOKS:
+----------------
+All 27 New Testament books:
+  - Gospels: Matthew, Mark, Luke, John
+  - History: Acts
+  - Pauline Epistles: Romans, 1-2 Corinthians, Galatians, Ephesians,
+    Philippians, Colossians, 1-2 Thessalonians, 1-2 Timothy, Titus, Philemon
+  - General Epistles: Hebrews, James, 1-2 Peter, 1-3 John, Jude
+  - Prophecy: Revelation
+
+BOOK NAME VARIANTS:
+-------------------
+The program understands multiple book name formats:
+  - Full names: "1 Corinthians", "First Corinthians"
+  - Abbreviations: "1Co", "1Cor", "1 Cor"
+  - Common variations: "1 John", "1John", "1Jn", "1Jo"
+
+================================================================================
+6. AI PROVIDER INFORMATION
+================================================================================
+
+Your installation uses one of two AI providers:
+
+OLLAMA (LOCAL):
+---------------
+Model: Mixtral 7B (default) or custom model
+Location: Runs on your computer
+Requirements: 8+ GB RAM, 10+ GB disk space
+Privacy: 100% local, no data leaves your computer
+Cost: Free (after downloading model)
+
+To use Ollama:
+  1. Ollama must be running: ollama serve
+  2. Model must be downloaded: ollama pull mixtral
+  3. Set in .env: AI_PROVIDER=ollama
+
+GOOGLE GEMINI (API):
+--------------------
+Model: Gemini Pro (default)
+Location: Cloud-based (Google servers)
+Requirements: Internet connection, API key
+Privacy: Data sent to Google (review their privacy policy)
+Cost: Free tier available, paid plans for heavy usage
+
+To use Gemini:
+  1. Get API key: https://makersuite.google.com/app/apikey
+  2. Save in .env: GOOGLE_API_KEY=your_key_here
+  3. Set in .env: AI_PROVIDER=gemini
+
+SWITCHING PROVIDERS:
+--------------------
+Edit the .env file in the installation directory:
+
+For Ollama:
+  AI_PROVIDER=ollama
+  OLLAMA_MODEL=mixtral
+
+For Gemini:
+  AI_PROVIDER=gemini
+  GOOGLE_API_KEY=your_api_key_here
+  GEMINI_MODEL=gemini-pro
+
+Then restart the program.
+
+================================================================================
+7. TROUBLESHOOTING
+================================================================================
+
+PROGRAM WON'T START:
+--------------------
+Q: "ModuleNotFoundError: No module named 'chromadb'"
+A: Dependencies not installed. Run: python install.py
+
+Q: "Cannot connect to Ollama"
+A: Start Ollama in another terminal: ollama serve
+
+Q: "GOOGLE_API_KEY not found"
+A: Create .env file with: GOOGLE_API_KEY=your_key_here
+
+VERSE NOT FOUND:
+----------------
+Q: "Verse not found" error
+A: Check spelling and format:
+   - Use: "1 John 4:8" not "1John 4:8"
+   - Ensure verse exists (John 3:100 doesn't exist)
+
+SLOW RESPONSES:
+---------------
+Q: AI is very slow to respond
+A: For Ollama - Normal on first query (loading model)
+   For Gemini - Check internet connection
+
+DATABASE ERRORS:
+----------------
+Q: "ChromaDB error" or "Collection not found"
+A: Delete chroma_db_interlinear/ folder and restart
+   (Will re-seed database on next run)
+
+GENERAL DEBUGGING:
+------------------
+If you encounter issues:
+1. Check install_log.txt for error details
+2. Try running: python install.py (reinstall)
+3. Check Python version: python --version (need 3.8+)
+4. Clear database: delete chroma_db_interlinear/ folder
+
+================================================================================
+8. SUPPORT & BUG REPORTS
+================================================================================
+
+If you encounter problems:
+
+1. CHECK THE LOG FILE:
+   - Location: install_log.txt
+   - Contains detailed error information
+
+2. REPORT ISSUES:
+   Include the following information:
+   - Operating system and version
+   - Python version (python --version)
+   - AI provider (Ollama or Gemini)
+   - Full error message
+   - Contents of install_log.txt
+   - Steps to reproduce the problem
+
+3. WHERE TO REPORT:
+   [Contact information to be added]
+
+================================================================================
+9. FUTURE ROADMAP
+================================================================================
+
+This project is planned to expand significantly:
+
+SHORT-TERM:
+-----------
+✓ Greek New Testament with AI analysis (COMPLETE)
+✓ English reference layer (COMPLETE)
+✓ Strong's Lexicon integration (COMPLETE)
+□ Septuagint (Greek Old Testament) integration
+□ Morphological word-by-word interlinear display
+□ Cross-reference system
+□ Export to PDF/HTML
+
+MID-TERM:
+---------
+□ Additional Christian texts:
+  - Early Church Fathers (Greek and Latin)
+  - Systematic theology works
+  - Commentaries and study guides
+□ Advanced search with syntax trees
+□ Original language Hebrew (Old Testament)
+□ Multiple Greek text versions (Byzantine, Textus Receptus)
+
+LONG-TERM (Business Vision):
+-----------------------------
+□ Expand to dozens/hundreds of Christian books
+□ Comprehensive theological library with AI analysis
+□ Custom study guide generation
+□ Paid subscription service for premium features:
+  - Access to full library (100+ books)
+  - Advanced AI models
+  - Personal study plan generation
+  - Export and annotation tools
+  - Mobile app access
+
+This tool is currently FREE and open for research/study. The eventual goal is
+a comprehensive paid service for serious Bible scholars and students, with
+local LLM options for privacy-conscious users.
+
+================================================================================
+CREDITS & ACKNOWLEDGMENTS
+================================================================================
+
+Greek Text: Society of Biblical Literature (Michael W. Holmes, editor)
+Morphology: MorphGNT Project (James Tauber and contributors)
+English Text: World English Bible (Public Domain)
+Lexicon: Strong's Greek Lexicon (Public Domain)
+AI Framework: Ollama / Google Gemini
+Vector Database: ChromaDB
+Programming: Python 3
+
+Special Thanks:
+- Society of Biblical Literature for the SBLGNT
+- MorphGNT community for morphological tagging
+- TehShrike for clean WEB JSON format
+- Logos Bible Software for hosting SBLGNT source files
+- Open source community for tools and libraries
+
+================================================================================
+ENJOY YOUR STUDY!
+================================================================================
+
+The Greek New Testament is a rich text that rewards careful study. This tool
+is designed to help you engage with the original language in a scholarly and
+rigorous way.
+
+May your study be fruitful!
+
+================================================================================
+EOF
