@@ -1,0 +1,95 @@
+{
+  "John": {
+    "18": {
+      "5": {
+        "book_name": "John",
+        "chapter": 18,
+        "verse": 5,
+        "commentary_text": ",  7;  19:19;  Acts  2:22;  3:6;  4:10;  6:14;  22:8;  26:9).",
+        "greek_words": []
+      }
+    }
+  },
+  "Luke": {
+    "17": {
+      "2": {
+        "book_name": "Luke",
+        "chapter": 17,
+        "verse": 2,
+        "commentary_text": ";  Heb.  12:1.  But  it  is  also  used  as  the  passive  of",
+        "greek_words": []
+      }
+    }
+  },
+  "Acts": {
+    "28": {
+      "6": {
+        "book_name": "Acts",
+        "chapter": 28,
+        "verse": 6,
+        "commentary_text": ";  II  Thess.  3:2.  Note  present  tense  active  voice",
+        "greek_words": []
+      }
+    },
+    "2": {
+      "22": {
+        "book_name": "Acts",
+        "chapter": 2,
+        "verse": 22,
+        "commentary_text": "which  see  and  I  Cor.  4:9).",
+        "greek_words": []
+      }
+    },
+    "12": {
+      "15": {
+        "book_name": "Acts",
+        "chapter": 12,
+        "verse": 15,
+        "commentary_text": ";  ^  ^o'\"-  H'23-  The  enthusiasm  of  Paul  was  too",
+        "greek_words": []
+      }
+    },
+    "16": {
+      "26": {
+        "book_name": "Acts",
+        "chapter": 16,
+        "verse": 26,
+        "commentary_text": ";  27:40;  Eph.  6:9;  Heb.  13:5.  Thayer  notes  that",
+        "greek_words": []
+      }
+    }
+  },
+  "Titus": {
+    "3": {
+      "4": {
+        "book_name": "Titus",
+        "chapter": 3,
+        "verse": 4,
+        "commentary_text": "(adverb  in  27:3).  See  on  19:11  for  this  use  of  ow  <?n",
+        "greek_words": []
+      }
+    }
+  },
+  "James": {
+    "1": {
+      "15": {
+        "book_name": "James",
+        "chapter": 1,
+        "verse": 15,
+        "commentary_text": "uses  it  of  lust  producing  sin.  Hobart  (Medical",
+        "greek_words": []
+      }
+    }
+  },
+  "Mark": {
+    "5": {
+      "38": {
+        "book_name": "Mark",
+        "chapter": 5,
+        "verse": 38,
+        "commentary_text": "thorubou)  when  Jesus  asked  Ti  thorubeisthe?  For",
+        "greek_words": []
+      }
+    }
+  }
+}

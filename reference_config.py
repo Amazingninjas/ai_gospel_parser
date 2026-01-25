@@ -29,6 +29,8 @@ class ReferenceTextConfig:
     MOULTON_MILLIGAN_ENABLED = os.getenv("ENABLE_MOULTON_MILLIGAN", "true").lower() == "true"
     ROBERTSON_GRAMMAR_ENABLED = os.getenv("ENABLE_ROBERTSON_GRAMMAR", "true").lower() == "true"
     JOSEPHUS_ENABLED = os.getenv("ENABLE_JOSEPHUS", "true").lower() == "true"
+    ROBERTSON_WORD_PICTURES_ENABLED = os.getenv('ENABLE_ROBERTSON_WORD_PICTURES', 'true').lower() == 'true'
+    VINCENT_WORD_STUDIES_ENABLED = os.getenv('ENABLE_VINCENT_WORD_STUDIES', 'true').lower() == 'true'
 
     # Future texts (for when you add more)
     BDAG_ENABLED = os.getenv("ENABLE_BDAG", "false").lower() == "true"  # Commercial, requires license
@@ -47,6 +49,10 @@ class ReferenceTextConfig:
             enabled.append("Robertson's Grammar")
         if cls.JOSEPHUS_ENABLED:
             enabled.append("Josephus Works")
+        if cls.ROBERTSON_WORD_PICTURES_ENABLED:
+            enabled.append("Robertson's Word Pictures")
+        if cls.VINCENT_WORD_STUDIES_ENABLED:
+            enabled.append("Vincent's Word Studies")
         if cls.BDAG_ENABLED:
             enabled.append("BDAG Lexicon")
         if cls.LOUW_NIDA_ENABLED:
@@ -63,6 +69,8 @@ class ReferenceTextConfig:
         lines.append(f"  - Moulton-Milligan: {'✓ ENABLED' if cls.MOULTON_MILLIGAN_ENABLED else '✗ DISABLED'}")
         lines.append(f"  - Robertson Grammar: {'✓ ENABLED' if cls.ROBERTSON_GRAMMAR_ENABLED else '✗ DISABLED'}")
         lines.append(f"  - Josephus Works: {'✓ ENABLED' if cls.JOSEPHUS_ENABLED else '✗ DISABLED'}")
+        lines.append(f"  - Robertson's Word Pictures: {'✓ ENABLED' if cls.ROBERTSON_WORD_PICTURES_ENABLED else '✗ DISABLED'}")
+        lines.append(f"  - Vincent's Word Studies: {'✓ ENABLED' if cls.VINCENT_WORD_STUDIES_ENABLED else '✗ DISABLED'}")
 
         if cls.BDAG_ENABLED or cls.LOUW_NIDA_ENABLED or cls.HEBREW_LEXICON_ENABLED:
             lines.append("\nCommercial/Licensed Texts:")

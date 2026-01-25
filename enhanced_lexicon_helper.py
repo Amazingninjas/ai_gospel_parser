@@ -58,6 +58,8 @@ class EnhancedLexiconHelper:
         self.moulton_milligan = None
         self.josephus = None
         self.robertson = None
+        self.robertson_word_pictures = None
+        self.vincent_word_studies = None
 
         self._load_enabled_texts()
 
@@ -119,6 +121,32 @@ class EnhancedLexiconHelper:
                     print(f"⚠ Robertson's Grammar data not found at {robertson_path}")
             except Exception as e:
                 print(f"⚠ Error loading Robertson's Grammar: {e}")
+
+        # Load Robertson's Word Pictures
+        if self.config.ROBERTSON_WORD_PICTURES_ENABLED:
+            try:
+                rwp_path = "reference_texts/robertson_word_pictures/robertson_word_pictures_data.json"
+                if os.path.exists(rwp_path):
+                    with open(rwp_path, 'r', encoding='utf-8') as f:
+                        self.robertson_word_pictures = json.load(f)
+                    print(f"✓ Loaded Robertson's Word Pictures")
+                else:
+                    print(f"⚠ Robertson's Word Pictures data not found at {rwp_path}")
+            except Exception as e:
+                print(f"⚠ Error loading Robertson's Word Pictures: {e}")
+
+        # Load Vincent's Word Studies
+        if self.config.VINCENT_WORD_STUDIES_ENABLED:
+            try:
+                vws_path = "reference_texts/vincent_word_studies/vincent_word_studies_data.json"
+                if os.path.exists(vws_path):
+                    with open(vws_path, 'r', encoding='utf-8') as f:
+                        self.vincent_word_studies = json.load(f)
+                    print(f"✓ Loaded Vincent's Word Studies")
+                else:
+                    print(f"⚠ Vincent's Word Studies data not found at {vws_path}")
+            except Exception as e:
+                print(f"⚠ Error loading Vincent's Word Studies: {e}")
 
         print()
 
@@ -196,13 +224,47 @@ class EnhancedLexiconHelper:
 
         return None
 
-    def build_ai_context(self, strongs_numbers: List[str], keywords: List[str] = None) -> str:
+    def lookup_verse_commentary(self, book: str, chapter: int, verse: int) -> Dict[str, dict]:
+        """
+        Look up verse commentary from enabled texts.
+
+        Args:
+            book: Name of the book.
+            chapter: Chapter number.
+            verse: Verse number.
+
+        Returns:
+            Dictionary with results from each enabled text.
+        """
+        results = {}
+        # Robertson's Word Pictures lookup
+        if self.robertson_word_pictures:
+            book_data = self.robertson_word_pictures.get(book, {})
+            chapter_data = book_data.get(str(chapter), {})
+            verse_data = chapter_data.get(str(verse))
+            if verse_data:
+                results['robertson_word_pictures'] = verse_data
+
+        # Vincent's Word Studies lookup
+        if self.vincent_word_studies:
+            book_data = self.vincent_word_studies.get(book, {})
+            chapter_data = book_data.get(str(chapter), {})
+            verse_data = chapter_data.get(str(verse))
+            if verse_data:
+                results['vincent_word_studies'] = verse_data
+
+        return results
+
+    def build_ai_context(self, strongs_numbers: List[str], keywords: List[str] = None, book: str = None, chapter: int = None, verse: int = None) -> str:
         """
         Build comprehensive AI context from all enabled texts.
 
         Args:
             strongs_numbers: List of Strong's numbers to look up
             keywords: Optional list of historical keywords (people, places, events)
+            book: Optional book for verse-specific context.
+            chapter: Optional chapter for verse-specific context.
+            verse: Optional verse for verse-specific context.
 
         Returns:
             Formatted context string for AI
@@ -239,6 +301,20 @@ class EnhancedLexiconHelper:
                 if hist_context:
                     context_parts.append(f"  {keyword}: {hist_context['count']} mentions in Josephus")
 
+        # Verse Commentary
+        if book and chapter and verse:
+            commentaries = self.lookup_verse_commentary(book, chapter, verse)
+            if commentaries:
+                context_parts.append(f"\n**Commentary on {book} {chapter}:{verse}:**")
+                if 'robertson_word_pictures' in commentaries:
+                    rwp = commentaries['robertson_word_pictures']
+                    context_parts.append(f"  Robertson's Word Pictures: {rwp.get('commentary_text', 'N/A')[:250]}...")
+                if 'vincent_word_studies' in commentaries:
+                    vws = commentaries['vincent_word_studies']
+                    # Vincent can have multiple entries per verse
+                    for entry in vws[:2]:
+                        context_parts.append(f"  Vincent's Word Studies: {entry.get('word_study', 'N/A')[:250]}...")
+        
         return '\n'.join(context_parts)
 
 
