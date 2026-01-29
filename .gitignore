@@ -60,3 +60,13 @@ build/
 test_output/
 temp/
 tmp/
+
+# Unrelated projects (not part of gospel parser)
+ai_presentation_builder/
+
+# Internal development files
+.claude/
+GITHUB_CLEANUP_COMPLETE.md
+
+# Development notes (keep in git but could exclude if needed)
+# docs/development/
