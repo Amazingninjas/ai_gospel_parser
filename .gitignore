@@ -47,3 +47,16 @@ web_bible_json/
 
 # get-pip.py (can be re-downloaded)
 get-pip.py
+
+# Release archives
+*.zip
+*.tar.gz
+*.tar.bz2
+dist/
+build/
+*.egg-info/
+
+# Temporary test files
+test_output/
+temp/
+tmp/
