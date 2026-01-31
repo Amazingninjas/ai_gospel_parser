@@ -9,7 +9,9 @@ interface ChatInterfaceProps {
 const ChatInterface = ({ verseReference }: ChatInterfaceProps) => {
   const [input, setInput] = useState('');
   const [showHistory, setShowHistory] = useState(false);
+  const [isUserScrolling, setIsUserScrolling] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const { messages, sendMessage, connected, loading, error, loadMessages } = useWebSocket();
   const {
@@ -23,10 +25,39 @@ const ChatInterface = ({ verseReference }: ChatInterfaceProps) => {
     startNewConversation
   } = useConversation();
 
-  // Auto-scroll to bottom when new messages arrive
+  // Check if user is near the bottom of the chat
+  const isNearBottom = () => {
+    const container = messagesContainerRef.current;
+    if (!container) return true;
+
+    const threshold = 100; // pixels from bottom
+    const position = container.scrollTop + container.clientHeight;
+    const bottom = container.scrollHeight;
+
+    return bottom - position < threshold;
+  };
+
+  // Handle scroll events to detect manual scrolling
+  const handleScroll = () => {
+    if (isNearBottom()) {
+      setIsUserScrolling(false);
+    } else {
+      setIsUserScrolling(true);
+    }
+  };
+
+  // Smart auto-scroll: only scroll if user is near bottom
   useEffect(() => {
+    if (!isUserScrolling) {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, isUserScrolling]);
+
+  // Always scroll to bottom when sending a new message
+  const scrollToBottom = () => {
+    setIsUserScrolling(false);
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  };
 
   // Load messages from current conversation
   useEffect(() => {
@@ -65,6 +96,7 @@ const ChatInterface = ({ verseReference }: ChatInterfaceProps) => {
 
     sendMessage(input, verseReference);
     setInput('');
+    scrollToBottom(); // Always scroll to bottom when sending
   };
 
   const handleLoadConversation = async (id: number) => {
@@ -86,12 +118,13 @@ const ChatInterface = ({ verseReference }: ChatInterfaceProps) => {
 
   return (
     <div className="bg-white rounded-lg shadow p-6 flex flex-col h-[600px] relative">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 min-h-[2rem]">
         <div className="flex items-center gap-2">
           <h2 className="text-xl font-semibold">AI Chat</h2>
-          {saving && (
-            <span className="text-xs text-gray-500 italic">Saving...</span>
-          )}
+          {/* Reserve space for saving indicator to prevent layout shift */}
+          <span className="text-xs text-gray-500 italic min-w-[60px]">
+            {saving ? 'Saving...' : ''}
+          </span>
           {currentConversation && (
             <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
               {currentConversation.title || 'Untitled'}
@@ -195,7 +228,11 @@ const ChatInterface = ({ verseReference }: ChatInterfaceProps) => {
       )}
 
       {/* Messages Container */}
-      <div className="flex-1 overflow-y-auto mb-4 space-y-4 border border-gray-200 rounded-md p-4">
+      <div
+        ref={messagesContainerRef}
+        onScroll={handleScroll}
+        className="flex-1 overflow-y-auto mb-4 space-y-4 border border-gray-200 rounded-md p-4 relative"
+      >
         {messages.length === 0 ? (
           <div className="text-center text-gray-500 py-8">
             <p>Ask questions about Greek words, grammar, or theology</p>
@@ -240,6 +277,19 @@ const ChatInterface = ({ verseReference }: ChatInterfaceProps) => {
           </div>
         )}
         <div ref={messagesEndRef} />
+
+        {/* Scroll to bottom button - shown when user has scrolled up */}
+        {isUserScrolling && (
+          <button
+            onClick={scrollToBottom}
+            className="absolute bottom-4 right-4 bg-blue-600 text-white rounded-full p-2 shadow-lg hover:bg-blue-700 transition"
+            title="Scroll to bottom"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Input Form */}

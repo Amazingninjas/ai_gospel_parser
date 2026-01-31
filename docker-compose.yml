@@ -14,6 +14,9 @@ services:
     restart: unless-stopped
     ports:
       - "8000:8000"
+    extra_hosts:
+      # Make host.docker.internal work on Linux/WSL
+      - "host.docker.internal:host-gateway"
     environment:
       # Database
       DATABASE_URL: ${DATABASE_URL:-sqlite:///./data/gospel_parser.db}
@@ -40,14 +43,14 @@ services:
       # Persist database
       - ./backend/data:/app/data
 
-      # Persist ChromaDB
-      - ./backend/chroma_db_interlinear:/app/chroma_db_interlinear
+      # Mount ChromaDB with write access (needs write for locks/metadata)
+      - ./chroma_db_interlinear:/project/chroma_db_interlinear
 
-      # Mount reference text data (read-only)
-      - ./backend/sblgnt:/app/sblgnt:ro
-      - ./backend/strongsgreek.xml:/app/strongsgreek.xml:ro
-      - ./backend/enhanced_lexicon.json:/app/enhanced_lexicon.json:ro
-      - ./backend/web_bible_json:/app/web_bible_json:ro
+      # Mount reference data (read-only is fine for these)
+      - ./sblgnt:/project/sblgnt:ro
+      - ./strongsgreek.xml:/project/strongsgreek.xml:ro
+      - ./enhanced_lexicon.json:/project/enhanced_lexicon.json:ro
+      - ./web_bible_json:/project/web_bible_json:ro
     networks:
       - gospel-parser
     healthcheck:

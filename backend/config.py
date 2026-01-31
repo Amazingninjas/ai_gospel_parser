@@ -40,11 +40,17 @@ class Settings:
     GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-pro")
 
     # Existing resources (reuse from CLI version)
-    CHROMA_DB_PATH = str(PROJECT_ROOT / "chroma_db_interlinear")
-    SBLGNT_PATH = str(PROJECT_ROOT / "sblgnt")
-    LEXICON_PATH = str(PROJECT_ROOT / "strongsgreek.xml")
-    WEB_BIBLE_PATH = str(PROJECT_ROOT / "web_bible_json")
-    ENHANCED_LEXICON_PATH = str(PROJECT_ROOT / "enhanced_lexicon.json")
+    # In Docker: mounted to /project (entire project root)
+    # In local dev: in project root (PROJECT_ROOT)
+    # Check for /project first (Docker), fall back to PROJECT_ROOT (local dev)
+    DOCKER_PROJECT_ROOT = Path("/project")
+    _project_base = DOCKER_PROJECT_ROOT if DOCKER_PROJECT_ROOT.exists() else PROJECT_ROOT
+
+    CHROMA_DB_PATH = str(_project_base / "chroma_db_interlinear")
+    SBLGNT_PATH = str(_project_base / "sblgnt")
+    LEXICON_PATH = str(_project_base / "strongsgreek.xml")
+    WEB_BIBLE_PATH = str(_project_base / "web_bible_json")
+    ENHANCED_LEXICON_PATH = str(_project_base / "enhanced_lexicon.json")
 
     # Reference texts
     THAYERS_ENABLED = os.getenv("ENABLE_THAYERS", "true").lower() == "true"

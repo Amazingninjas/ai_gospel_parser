@@ -1,97 +1,85 @@
-## What's New in v3.5.0
+# AI Gospel Parser v1.0.0 - Full Web Application
 
-### ✨ Major Features
+🎉 **Major Release:** Complete transformation from CLI tool to full-stack web application!
 
-- **10,382+ verses with comprehensive commentary** from Robertson's Word Pictures and Vincent's Word Studies
-- **Clean HTML source integration** (28x improvement over OCR sources)
-- **Complete New Testament coverage** across all 27 books
-- **Dual AI provider support** - Choose between Ollama (local/private) or Google Gemini (cloud API)
-- **Comprehensive installer** with automatic system requirements checking
-- **Professional documentation** and user guides
+## 🌟 What's New
 
-### 📚 Commentary Coverage
+### Web Application
+- **Modern React Frontend** - TypeScript + Vite 7 + TailwindCSS 3.4.1
+- **FastAPI Backend** - RESTful API + WebSocket streaming
+- **User Authentication** - Secure JWT tokens with bcrypt password hashing
+- **Real-time AI Chat** - Streaming responses via WebSocket with Ollama/Gemini
+- **Conversation History** - Save and resume conversations in SQLite database
 
-- **Robertson's Word Pictures:** 5,142 verses with grammatical analysis (17 NT books)
-- **Vincent's Word Studies:** 5,240 verses with word studies (all 27 NT books)
-- **Thayer's Greek Lexicon:** 5,624 Strong's entries with definitions
-- **Moulton-Milligan Vocabulary:** 5,311 papyri examples showing everyday Greek usage
-- **Josephus' Antiquities:** Historical context for NT period
+### Features
+- ✅ **Verse Lookup** - Search Greek NT (SBLGNT) with English (WEB) translation
+- ✅ **Interactive Greek Text** - Click words to see lexicon entries instantly
+- ✅ **Strong's Lexicon** - Complete morphology, definitions, and cross-references
+- ✅ **AI Biblical Scholar** - Ask questions about Greek words, grammar, and theology
+- ✅ **Smart Chat Interface** - Auto-scroll that respects your scroll position
+- ✅ **Mobile Responsive** - Tab navigation optimized for small screens
+- ✅ **Enhanced Greek Fonts** - Noto Serif and Noto Sans for beautiful Greek typography
 
-### 🚀 Installation
+### Docker Deployment
+- 🐳 **One-Command Setup** - `docker-compose up -d` and you're running
+- 🔒 **Isolated Containers** - Backend (FastAPI) and Frontend (Nginx) separation
+- 📦 **Multi-stage Builds** - Optimized image sizes
+- 🔄 **Health Checks** - Automatic monitoring and recovery
+- 💾 **Volume Persistence** - Data and conversations survive restarts
 
-**Quick Start:**
+## 🚀 Quick Start
 
-1. Download the source code (ZIP or tar.gz) below
-2. Extract the archive
-3. Run the installer:
-   ```bash
-   python install.py
-   ```
+### Prerequisites
+- Docker Desktop (with WSL2 on Windows)
+- Ollama with mixtral model: `ollama pull mixtral`
 
-The installer will:
-- Check system requirements
-- Install Python dependencies
-- Download English Bible reference
-- Set up your AI provider (Ollama or Gemini)
-- Create convenient launch scripts
+### Launch
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/ai_gospel_parser.git
+cd ai_gospel_parser
 
-### 📋 System Requirements
+# Start all services
+docker-compose up -d
 
-**Minimum (with Gemini API):**
-- Python 3.8+
-- 4 GB RAM
-- 2 GB disk space
-- Internet connection
+# Open in browser
+open http://localhost:3000
+```
 
-**Recommended (with Local Ollama):**
-- Python 3.8+
-- 16 GB RAM (8 GB minimum)
-- 20 GB disk space (for Mixtral model)
-- GPU with 8+ GB VRAM (optional, improves speed)
+### Test
+```bash
+# Run automated tests
+./test-docker.sh
+```
 
-### 📖 Documentation
+## 📚 Documentation
+- **Quick Start**: [GET_STARTED_WEB_UI.md](GET_STARTED_WEB_UI.md)
+- **Full Roadmap**: [WEB_UI_ROADMAP.md](WEB_UI_ROADMAP.md)
+- **API Documentation**: http://localhost:8000/docs (when running)
+- **Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md)
 
-- [Getting Started Guide](https://github.com/Amazingninjas/ai_gospel_parser/blob/main/GETTING_STARTED.txt) - Comprehensive setup and usage
-- [Quick Start](https://github.com/Amazingninjas/ai_gospel_parser/blob/main/QUICK_START.md) - Fast reference
-- [Greek Text Verification](https://github.com/Amazingninjas/ai_gospel_parser/blob/main/docs/GREEK_TEXT_VERIFICATION.md) - Source provenance
-- [Vision & Roadmap](https://github.com/Amazingninjas/ai_gospel_parser/blob/main/docs/VISION.md) - Future plans
+## 🐛 Bug Fixes
+- Fixed bcrypt 72-byte password limit with SHA256 pre-hashing
+- Fixed ChromaDB tenant connection in Docker containers
+- Fixed WEB Bible path resolution for English text
+- Fixed Ollama connectivity from Docker using host.docker.internal
+- Fixed layout shift from "Saving..." indicator
+- Fixed auto-scroll forcing users to bottom while reading history
 
-### 🎯 Use Cases
+## 📊 Stats
+- **25/25 Tasks Complete** (100%)
+- **16 API Endpoints** (15 REST + 1 WebSocket)
+- **9 React Components** (Dashboard, Chat, Verse, Lexicon, Auth)
+- **5 Custom Hooks** (useAuth, useWebSocket, useVerse, useLexicon, useConversation)
+- **13,551 NT Verses** indexed in ChromaDB
+- **5,624 Greek Lexicon Entries** with full morphology
 
-Perfect for:
-- Seminary students studying Biblical Greek
-- Pastors preparing sermons with original language insights
-- Bible study leaders seeking deeper understanding
-- Scholars researching New Testament texts
-- Anyone wanting to study the NT in its original language
+## 🙏 Acknowledgments
+Built with Claude Sonnet 4.5 for analyzing Greek New Testament text with modern AI technology.
 
-### 🐛 Bug Fixes
-
-None - This is the initial production-ready release (beta)
-
-### 🙏 Acknowledgments
-
-**Data Sources:**
-- [SBLGNT](http://sblgnt.com/) - Society of Biblical Literature Greek New Testament
-- [MorphGNT](https://github.com/morphgnt/sblgnt) - Morphological tagging
-- [World English Bible](https://github.com/TehShrike/world-english-bible) - English reference
-- [CCEL](https://www.ccel.org/) - Robertson's Word Pictures (HTML)
-- [StudyLight.org](https://www.studylight.org/) - Vincent's Word Studies (HTML)
-
-**AI Providers:**
-- [Ollama](https://ollama.ai) - Local LLM runtime
-- [Google Gemini](https://ai.google.dev/) - Cloud AI API
+## 📝 License
+MIT License - See [LICENSE](LICENSE) for details
 
 ---
 
-**Status:** Production Ready (Beta)
-**License:** MIT (software) + Public Domain (texts)
-**Support:** [Open an issue](https://github.com/Amazingninjas/ai_gospel_parser/issues)
-
-### 📊 Project Statistics
-
-- Greek NT Verses: 7,957
-- Commentary Verses: 10,382+
-- Lexicon Entries: 5,624
-- Papyri Examples: 5,311
-- Historical References: 20 books of Josephus
+**Previous Version**: CLI interface (v0.1.0)

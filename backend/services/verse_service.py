@@ -68,12 +68,19 @@ class VerseService:
     def _initialize_db(self):
         """Initialize ChromaDB client and collection"""
         try:
+            print(f"DEBUG: Attempting to connect to ChromaDB at: {settings.CHROMA_DB_PATH}")
+            print(f"DEBUG: Path exists: {Path(settings.CHROMA_DB_PATH).exists()}")
+            print(f"DEBUG: Is directory: {Path(settings.CHROMA_DB_PATH).is_dir()}")
+
             self.chroma_client = chromadb.PersistentClient(path=settings.CHROMA_DB_PATH)
             self.collection = self.chroma_client.get_collection(name="gospel_interlinear")
             print(f"✓ Connected to ChromaDB ({self.collection.count()} documents)")
         except Exception as e:
             print(f"⚠ Error initializing ChromaDB: {e}")
             print(f"   Make sure ChromaDB exists at: {settings.CHROMA_DB_PATH}")
+            print(f"   Exception type: {type(e).__name__}")
+            import traceback
+            traceback.print_exc()
             raise
 
     def parse_verse_reference(self, ref_string: str) -> Optional[dict | list[dict]]:
@@ -153,7 +160,7 @@ class VerseService:
 
         # Load WEB Bible JSON if not cached
         if web_book_code not in self.web_bible_cache:
-            web_bible_path = project_root / "web_bible_json"
+            web_bible_path = Path(settings.WEB_BIBLE_PATH)
 
             try:
                 import glob

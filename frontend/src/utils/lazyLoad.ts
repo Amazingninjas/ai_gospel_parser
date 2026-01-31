@@ -4,7 +4,8 @@
  * Utilities for code splitting and lazy loading components.
  */
 
-import { lazy, ComponentType } from 'react';
+import { lazy } from 'react';
+import type { ComponentType } from 'react';
 
 /**
  * Retry lazy loading up to 3 times before failing

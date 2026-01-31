@@ -1,0 +1,4 @@
+
+# Test and development scripts
+*.sh
+!setup_backend.sh

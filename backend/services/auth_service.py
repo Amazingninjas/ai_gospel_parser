@@ -15,7 +15,12 @@ from models.user import User
 
 
 # Password hashing
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Configure bcrypt to handle our pre-normalized passwords
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto",
+    bcrypt__ident="2b"  # Use bcrypt 2b variant for compatibility
+)
 
 
 class AuthService:
@@ -29,7 +34,8 @@ class AuthService:
         Bcrypt has a 72-byte limit. For longer passwords, we pre-hash with SHA256.
         This is a standard security practice.
         """
-        if len(password.encode('utf-8')) > 72:
+        # Use >= 72 to be conservative (bcrypt limit is exactly 72 bytes)
+        if len(password.encode('utf-8')) >= 72:
             # Pre-hash with SHA256 for long passwords
             return hashlib.sha256(password.encode('utf-8')).hexdigest()
         return password
