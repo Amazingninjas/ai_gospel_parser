@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Gospel Parser - WebSocket Chat Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        .chat-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .messages {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            background: #fafafa;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .user-message {
+            background: #e3f2fd;
+            text-align: right;
+        }
+        .ai-message {
+            background: #f1f8e9;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        input, button {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        input {
+            flex: 1;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            min-width: 100px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .status.connected {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .typing {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>🤖 AI Gospel Parser - WebSocket Chat Test</h1>
+
+    <div class="chat-container">
+        <div id="status" class="status disconnected">
+            ⚠️ Not connected
+        </div>
+
+        <div class="input-group">
+            <input
+                type="text"
+                id="verseInput"
+                placeholder="Verse reference (optional, e.g., John 3:16)"
+            />
+        </div>
+
+        <div class="input-group">
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Ask a question..."
+                onkeypress="if(event.key === 'Enter') sendMessage()"
+            />
+            <button onclick="sendMessage()" id="sendBtn">Send</button>
+        </div>
+
+        <div class="messages" id="messages"></div>
+
+        <button onclick="clearChat()" style="background: #f44336;">Clear Chat</button>
+    </div>
+
+    <script>
+        let ws = null;
+        let conversationHistory = [];
+        let currentResponse = '';
+
+        // Connect to WebSocket
+        function connect() {
+            const wsUrl = 'ws://localhost:8000/api/chat/stream';
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = () => {
+                updateStatus(true);
+                console.log('✓ WebSocket connected');
+            };
+
+            ws.onclose = () => {
+                updateStatus(false);
+                console.log('✗ WebSocket disconnected');
+                setTimeout(connect, 3000); // Reconnect after 3s
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+
+                if (data.error) {
+                    addMessage('ai', `Error: ${data.error}`);
+                    currentResponse = '';
+                    return;
+                }
+
+                if (!data.done) {
+                    // Accumulate chunk
+                    currentResponse += data.chunk;
+                    updateAIMessage(currentResponse);
+                } else {
+                    // Response complete
+                    if (currentResponse) {
+                        conversationHistory.push({
+                            role: 'assistant',
+                            content: currentResponse
+                        });
+                    }
+                    currentResponse = '';
+                    removeTypingIndicator();
+                }
+            };
+        }
+
+        function updateStatus(connected) {
+            const statusEl = document.getElementById('status');
+            if (connected) {
+                statusEl.className = 'status connected';
+                statusEl.textContent = '✓ Connected to AI';
+            } else {
+                statusEl.className = 'status disconnected';
+                statusEl.textContent = '⚠️ Disconnected - Reconnecting...';
+            }
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const verseInput = document.getElementById('verseInput');
+            const message = messageInput.value.trim();
+
+            if (!message) return;
+
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                alert('Not connected to server. Please wait...');
+                return;
+            }
+
+            // Add user message to UI
+            addMessage('user', message);
+
+            // Add to conversation history
+            conversationHistory.push({
+                role: 'user',
+                content: message
+            });
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Send to server
+            const request = {
+                message: message,
+                verse_reference: verseInput.value.trim() || null,
+                conversation_history: conversationHistory.slice(-10), // Last 10 messages
+                include_lexicon: true
+            };
+
+            ws.send(JSON.stringify(request));
+
+            // Clear input
+            messageInput.value = '';
+            currentResponse = '';
+        }
+
+        function addMessage(role, content) {
+            const messagesEl = document.getElementById('messages');
+            const messageEl = document.createElement('div');
+            messageEl.className = `message ${role}-message`;
+            messageEl.textContent = content;
+            messagesEl.appendChild(messageEl);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesEl = document.getElementById('messages');
+            const typingEl = document.createElement('div');
+            typingEl.id = 'typing';
+            typingEl.className = 'message ai-message typing';
+            typingEl.textContent = 'AI is typing...';
+            messagesEl.appendChild(typingEl);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function updateAIMessage(content) {
+            let aiMessageEl = document.getElementById('current-ai-message');
+
+            if (!aiMessageEl) {
+                // Remove typing indicator
+                const typingEl = document.getElementById('typing');
+                if (typingEl) typingEl.remove();
+
+                // Create new message element
+                const messagesEl = document.getElementById('messages');
+                aiMessageEl = document.createElement('div');
+                aiMessageEl.id = 'current-ai-message';
+                aiMessageEl.className = 'message ai-message';
+                messagesEl.appendChild(aiMessageEl);
+            }
+
+            aiMessageEl.textContent = content;
+            const messagesEl = document.getElementById('messages');
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const currentMsg = document.getElementById('current-ai-message');
+            if (currentMsg) {
+                currentMsg.removeAttribute('id');
+            }
+        }
+
+        function clearChat() {
+            document.getElementById('messages').innerHTML = '';
+            conversationHistory = [];
+            currentResponse = '';
+        }
+
+        // Connect on page load
+        connect();
+    </script>
+</body>
+</html>

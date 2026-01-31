@@ -1,258 +1,267 @@
 # AI Gospel Parser
 
-**A comprehensive Biblical Greek text analysis system with AI-powered study capabilities**
+> A modern web application for studying the Greek New Testament with AI assistance
 
-[![License](https://img.shields.io/badge/License-Mixed-blue.svg)](#license)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](#installation)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
+[![Node.js 20+](https://img.shields.io/badge/node-20+-green.svg)](https://nodejs.org/)
+[![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://www.docker.com/)
 
----
+## ✨ Features
 
-## 📖 Overview
+- 🔍 **Verse Lookup** - Search and study all 27 New Testament books
+- 📖 **Greek Lexicon** - Click any Greek word for instant definitions with Strong's numbers
+- 🤖 **AI Chat** - Ask questions about Greek grammar, theology, and word meanings
+- 💬 **Conversation History** - Auto-saved chat history for continued study
+- 📱 **Mobile Responsive** - Works beautifully on phones, tablets, and desktops
+- 🔐 **User Authentication** - Secure JWT-based login and registration
+- 🌐 **Offline AI Option** - Use local Ollama or cloud-based Gemini
+- 🐳 **Docker Ready** - One-command deployment with Docker Compose
 
-AI Gospel Parser is a powerful tool for studying the Greek New Testament with integrated AI assistance. It combines original Greek texts, English translations, comprehensive lexicons, and scholarly commentaries into an intelligent study environment.
+## 🚀 Quick Start (Docker - Recommended)
 
-**Perfect for:**
-- Seminary students studying Biblical Greek
-- Pastors preparing sermons
-- Bible study leaders seeking deeper insights
-- Anyone wanting to understand the New Testament in its original language
+The fastest way to get started:
 
----
-
-## ✨ Key Features
-
-### 📜 **Complete Greek New Testament**
-- **SBLGNT Text** with full morphological tagging (7,957 verses)
-- **World English Bible** for parallel English reference
-- Verse-by-verse navigation through all 27 NT books
-
-### 🔍 **Comprehensive Lexicons & Commentaries**
-- **Thayer's Greek Lexicon** (5,624 Strong's entries)
-- **Moulton-Milligan Vocabulary** (5,311 papyri examples)
-- **Robertson's Word Pictures** (5,142 verses with grammatical analysis)
-- **Vincent's Word Studies** (5,240 verses with word studies)
-- **Josephus' Antiquities** for historical context
-
-### 🤖 **Dual AI Provider Support**
-- **Ollama (Local):** 100% private, runs on your hardware, no API costs
-- **Google Gemini (API):** Cloud-based, no local hardware requirements
-
-### 🎯 **Intelligent Analysis**
-- Ask questions about Greek grammar, word meanings, and theological concepts
-- AI analyzes original Greek text (not English translations)
-- Context-aware responses using lexicons and commentaries
-- Conversation memory for follow-up questions
-
----
-
-## 🚀 Quick Start
-
-### Installation
-
-**Download the latest release:**
-1. Go to [Releases](https://github.com/Amazingninjas/ai_gospel_parser/releases)
-2. Download the installer for your platform
-3. Run the installer - it handles everything automatically
-
-**Or install manually:**
 ```bash
-# Clone the repository
-git clone https://github.com/Amazingninjas/ai_gospel_parser.git
+# 1. Clone the repository
+git clone https://github.com/yourusername/ai_gospel_parser.git
 cd ai_gospel_parser
 
-# Run the installer
-python install.py
+# 2. Configure environment
+cp .env.docker .env
+# Edit .env and set JWT_SECRET_KEY (see Configuration below)
+
+# 3. Start Ollama (for local AI)
+ollama serve
+ollama pull mixtral
+
+# 4. Start the application
+docker-compose up -d
+
+# 5. Open your browser
+# Frontend: http://localhost:3000
+# API Docs: http://localhost:8000/docs
 ```
 
-The installer will:
-- Check system requirements
-- Install Python dependencies
-- Download the English Bible reference
-- Set up your AI provider (Ollama or Gemini)
-- Create convenient launch scripts
+**That's it!** Register an account and start studying.
 
-### Running the Program
+## 📋 Prerequisites
 
-**Windows:**
-```bash
-run_interlinear.bat
-```
+### Option 1: Docker (Easiest)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) or Docker Engine
+- [Ollama](https://ollama.ai) (for local AI) **or** Gemini API key
 
-**macOS/Linux:**
-```bash
-./run_interlinear.sh
-```
+### Option 2: Manual Installation
+- Python 3.12 or higher
+- Node.js 20.19 or higher
+- Ollama (for local AI) **or** Gemini API key
 
-**Or run directly:**
-```bash
-python gospel_parser_interlinear.py
-```
+## 🛠️ Installation
 
----
+### Docker Installation (Recommended)
 
-## 💡 Usage Examples
-
-```
-> John 3:16
---- John 3:16 ---
-Greek:   Οὕτως γὰρ ἠγάπησεν ὁ θεὸς τὸν κόσμον...
-English: For God so loved the world...
-
-> What does agape mean in this verse?
-[AI provides detailed analysis of ἀγαπάω including:
- - Grammatical form (aorist active indicative)
- - Lexical definition from Thayer's
- - Cultural context from Moulton-Milligan
- - Theological insights from Robertson & Vincent]
-
-> How does this differ from phileo love?
-[AI explains the distinction using lexicon data]
-
-> quit
-```
-
----
-
-## 📋 System Requirements
-
-### Minimum (with Gemini API):
-- **Python:** 3.8 or higher
-- **RAM:** 4 GB
-- **Disk:** 2 GB free space
-- **Internet:** Required for Gemini API
-
-### Recommended (with Local Ollama):
-- **Python:** 3.8 or higher
-- **RAM:** 16 GB (8 GB minimum)
-- **Disk:** 20 GB free space (for Mixtral model)
-- **GPU:** 8+ GB VRAM (optional, improves speed)
-- **Internet:** One-time model download
-
----
-
-## 🔧 Configuration
-
-### AI Provider Setup
-
-**Option 1: Ollama (Local, Private, Free)**
-
-1. Install Ollama: https://ollama.ai
-2. Download model: `ollama pull mixtral`
-3. Configure `.env`:
+1. **Install Prerequisites**
    ```bash
-   AI_PROVIDER=ollama
-   OLLAMA_HOST=http://localhost:11434
-   OLLAMA_MODEL=mixtral
+   # Install Docker Desktop
+   # Download from: https://www.docker.com/products/docker-desktop
+
+   # Install Ollama
+   # Download from: https://ollama.ai
    ```
 
-**Option 2: Google Gemini (Cloud API)**
-
-1. Get API key: https://makersuite.google.com/app/apikey
-2. Configure `.env`:
+2. **Clone and Configure**
    ```bash
-   AI_PROVIDER=gemini
-   GEMINI_API_KEY=your_api_key_here
+   git clone https://github.com/yourusername/ai_gospel_parser.git
+   cd ai_gospel_parser
+
+   # Copy environment file
+   cp .env.docker .env
+
+   # Generate a secure JWT secret key
+   openssl rand -hex 32
+   # Copy the output and set it as JWT_SECRET_KEY in .env
    ```
 
-See [GETTING_STARTED.txt](GETTING_STARTED.txt) for detailed configuration options.
+3. **Start Ollama**
+   ```bash
+   ollama serve
+   ollama pull mixtral
+   ```
 
----
+4. **Launch Application**
+   ```bash
+   docker-compose up -d
+
+   # View logs
+   docker-compose logs -f
+
+   # Check status
+   docker-compose ps
+   ```
+
+5. **Access Application**
+   - Frontend: http://localhost:3000
+   - API Documentation: http://localhost:8000/docs
+   - Health Check: http://localhost:8000/api/health
+
+### Manual Installation
+
+See [QUICK_START.md](QUICK_START.md) for detailed manual installation instructions.
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+Edit `.env` file:
+
+```env
+# REQUIRED: Change this to a random secret key!
+JWT_SECRET_KEY=your-random-secret-key-here
+
+# AI Provider: "ollama" (local) or "gemini" (cloud)
+AI_PROVIDER=ollama
+
+# For local AI (Ollama)
+OLLAMA_HOST=http://host.docker.internal:11434
+OLLAMA_MODEL=mixtral
+
+# For cloud AI (Gemini) - optional alternative
+# AI_PROVIDER=gemini
+# GEMINI_API_KEY=your-api-key-here
+```
+
+**⚠️ Security:** Always set a unique `JWT_SECRET_KEY` in production!
+
+## 📖 Usage
+
+1. **Register:** Create an account at http://localhost:3000
+2. **Search:** Enter a verse reference like "John 3:16"
+3. **Explore:** Click Greek words to see definitions
+4. **Ask:** Chat with AI about the text
+
+See [USER_GUIDE.md](USER_GUIDE.md) for complete usage instructions.
+
+## 🏗️ Architecture
+
+```
+Frontend (React)  →  Backend (FastAPI)  →  AI (Ollama/Gemini)
+     ↓                      ↓
+  Port 3000            Port 8000
+                           ↓
+                   SQLite + ChromaDB
+```
+
+## 📁 Project Structure
+
+```
+ai_gospel_parser/
+├── backend/                 # FastAPI backend
+│   ├── main.py             # Entry point
+│   ├── models/             # Database models
+│   ├── routers/            # API endpoints (16 total)
+│   ├── services/           # Business logic
+│   └── tests/              # 21 integration tests
+├── frontend/               # React frontend
+│   └── src/
+│       ├── components/     # UI components
+│       ├── hooks/          # Custom React hooks
+│       └── pages/          # Page components
+└── docker-compose.yml      # Docker orchestration
+```
+
+## 🧪 Testing
+
+```bash
+# Backend tests (21 integration tests)
+cd backend
+pytest -v
+
+# Frontend build test
+cd frontend
+npm run build
+```
+
+## 📊 API Documentation
+
+Interactive API docs: http://localhost:8000/docs
+
+**Key Endpoints:**
+- `POST /api/auth/register` - Create account
+- `POST /api/auth/login` - Login
+- `GET /api/verses/{reference}` - Lookup verse
+- `GET /api/lexicon/strongs/{number}` - Lexicon entry
+- `WS /api/chat/stream` - AI chat
+- `GET /api/conversations` - Chat history
+
+## 🚢 Deployment
+
+### Production Deployment
+
+```bash
+# On production server
+git clone https://github.com/yourusername/ai_gospel_parser.git
+cd ai_gospel_parser
+
+# Configure
+cp .env.docker .env
+nano .env  # Set JWT_SECRET_KEY and configure
+
+# Deploy
+docker-compose up -d
+```
+
+See [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) for complete guide.
 
 ## 📚 Documentation
 
-- **[GETTING_STARTED.txt](GETTING_STARTED.txt)** - Comprehensive user guide
-- **[QUICK_START.md](QUICK_START.md)** - Fast reference guide
-- **[docs/GREEK_TEXT_VERIFICATION.md](docs/GREEK_TEXT_VERIFICATION.md)** - Source text provenance
-- **[docs/INTERLINEAR_README.md](docs/INTERLINEAR_README.md)** - Technical documentation
-
----
-
-## 🗺️ Roadmap
-
-### Current Status: Production Ready (v3.5)
-- ✅ Complete Greek New Testament with morphology
-- ✅ Dual AI provider support (Ollama + Gemini)
-- ✅ 10,382+ verses with commentary
-- ✅ Comprehensive installer system
-
-### Future Enhancements
-- [ ] Web interface (browser-based UI)
-- [ ] Hebrew Old Testament integration
-- [ ] Septuagint (Greek OT) support
-- [ ] Cross-reference linking
-- [ ] Export to PDF/HTML
-- [ ] Mobile apps
-
-See [Vision & Roadmap](docs/VISION.md) for long-term plans.
-
----
-
-## 📄 License
-
-This project uses multiple licenses for different components:
-
-### Software (Python Code)
-- **MIT License** - See [LICENSE](LICENSE) for details
-
-### Text Sources
-- **SBLGNT:** [SBLGNT EULA](http://sblgnt.com/license/) (text) + CC-BY-SA (morphology)
-- **World English Bible:** Public Domain
-- **Thayer's Lexicon:** Public Domain
-- **Robertson's Word Pictures:** Public Domain
-- **Vincent's Word Studies:** Public Domain
-- **Josephus' Antiquities:** Public Domain
-
----
+- **[USER_GUIDE.md](USER_GUIDE.md)** - Complete user guide
+- **[QUICK_START.md](QUICK_START.md)** - Quick reference
+- **[DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)** - Deployment guide
+- **[PERFORMANCE_OPTIMIZATION.md](PERFORMANCE_OPTIMIZATION.md)** - Performance tips
+- **[MONITORING_GUIDE.md](MONITORING_GUIDE.md)** - Monitoring setup
 
 ## 🤝 Contributing
 
 Contributions welcome! Please:
+
 1. Fork the repository
 2. Create a feature branch
-3. Submit a pull request
+3. Make your changes
+4. Submit a pull request
 
-**Areas needing help:**
-- Hebrew text integration
-- Web UI development
-- Additional commentary sources
-- Translation improvements
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
----
+## 📝 License
 
-## 💬 Support
-
-**Found a bug?** [Open an issue](https://github.com/Amazingninjas/ai_gospel_parser/issues)
-
-**Have questions?** Check [GETTING_STARTED.txt](GETTING_STARTED.txt) or open a discussion
-
-**Want to contribute?** See contributing guidelines above
-
----
+MIT License - see [LICENSE](LICENSE) file.
 
 ## 🙏 Acknowledgments
 
-**Data Sources:**
-- [SBLGNT](http://sblgnt.com/) - Society of Biblical Literature Greek New Testament
-- [MorphGNT](https://github.com/morphgnt/sblgnt) - Morphological tagging
-- [World English Bible](https://github.com/TehShrike/world-english-bible) - English reference text
-- [Christian Classics Ethereal Library](https://www.ccel.org/) - Robertson's Word Pictures
-- [StudyLight.org](https://www.studylight.org/) - Vincent's Word Studies
+- SBLGNT - Greek New Testament text
+- Strong's Concordance - Lexicon data
+- World English Bible - English reference
+- Ollama - Local LLM inference
+- FastAPI & React - Framework technologies
 
-**AI Providers:**
-- [Ollama](https://ollama.ai) - Local LLM runtime
-- [Google Gemini](https://ai.google.dev/) - Cloud AI service
+## 💡 FAQ
+
+**Q: Do I need Ollama?**
+A: You can use Ollama (local, free) or Gemini (cloud, API key required).
+
+**Q: How much RAM is needed?**
+A: Minimum 4GB, recommended 8GB+ for Ollama.
+
+**Q: Can I use this offline?**
+A: Yes with Ollama! Everything runs locally.
+
+**Q: Is it free?**
+A: Yes! Ollama is free. Gemini has costs (~$0.01-0.05 per conversation).
+
+## 📞 Support
+
+- **Documentation:** See `docs/` folder
+- **Issues:** [GitHub Issues](https://github.com/yourusername/ai_gospel_parser/issues)
 
 ---
 
-## 📊 Project Statistics
-
-- **Greek NT Verses:** 7,957
-- **Lexicon Entries:** 5,624 (Strong's numbers)
-- **Commentary Verses:** 10,382+
-- **Historical References:** 20 books of Josephus
-- **Papyri Examples:** 5,311 (Moulton-Milligan)
-
----
-
-**Made with ❤️ for Biblical Greek students worldwide**
+**Built with ❤️ for Greek New Testament study**

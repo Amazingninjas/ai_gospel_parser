@@ -1,0 +1,90 @@
+# Docker Compose for AI Gospel Parser
+# =====================================
+# Orchestrates backend (FastAPI) + frontend (React/Nginx)
+
+version: '3.8'
+
+services:
+  # Backend API (FastAPI)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: gospel-parser-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # Database
+      DATABASE_URL: ${DATABASE_URL:-sqlite:///./data/gospel_parser.db}
+
+      # JWT Security
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your-secret-key-change-in-production}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      JWT_EXPIRATION_DAYS: ${JWT_EXPIRATION_DAYS:-7}
+
+      # AI Provider
+      AI_PROVIDER: ${AI_PROVIDER:-ollama}
+      OLLAMA_HOST: ${OLLAMA_HOST:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-mixtral}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+
+      # Reference Texts
+      ENABLE_THAYERS: ${ENABLE_THAYERS:-true}
+      ENABLE_MOULTON_MILLIGAN: ${ENABLE_MOULTON_MILLIGAN:-true}
+      ENABLE_ROBERTSON_GRAMMAR: ${ENABLE_ROBERTSON_GRAMMAR:-true}
+      ENABLE_JOSEPHUS: ${ENABLE_JOSEPHUS:-true}
+      ENABLE_ROBERTSON_WORD_PICTURES: ${ENABLE_ROBERTSON_WORD_PICTURES:-true}
+      ENABLE_VINCENT_WORD_STUDIES: ${ENABLE_VINCENT_WORD_STUDIES:-true}
+    volumes:
+      # Persist database
+      - ./backend/data:/app/data
+
+      # Persist ChromaDB
+      - ./backend/chroma_db_interlinear:/app/chroma_db_interlinear
+
+      # Mount reference text data (read-only)
+      - ./backend/sblgnt:/app/sblgnt:ro
+      - ./backend/strongsgreek.xml:/app/strongsgreek.xml:ro
+      - ./backend/enhanced_lexicon.json:/app/enhanced_lexicon.json:ro
+      - ./backend/web_bible_json:/app/web_bible_json:ro
+    networks:
+      - gospel-parser
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Frontend (React + Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8000}
+    container_name: gospel-parser-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - gospel-parser
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+networks:
+  gospel-parser:
+    driver: bridge
+
+volumes:
+  # Named volumes (optional - currently using bind mounts)
+  backend-data:
+  chromadb-data:
