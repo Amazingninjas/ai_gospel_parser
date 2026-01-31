@@ -6,17 +6,28 @@
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![Node.js 20+](https://img.shields.io/badge/node-20+-green.svg)](https://nodejs.org/)
 [![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://www.docker.com/)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Amazingninjas/ai_gospel_parser/releases)
+
+**📹 [Watch Demo Video](#demo-video)** | **🚀 [Quick Start](#-quick-start-docker---recommended)** | **📖 [Documentation](#-documentation)**
+
+## 📸 Screenshots
+
+![Dashboard](https://via.placeholder.com/800x450?text=AI+Gospel+Parser+Dashboard)
+*Interactive dashboard with verse lookup, lexicon, and AI chat*
+
+![Greek Text Analysis](https://via.placeholder.com/800x450?text=Click+Greek+Words+for+Instant+Definitions)
+*Click any Greek word to see Strong's lexicon entries with morphology*
 
 ## ✨ Features
 
-- 🔍 **Verse Lookup** - Search and study all 27 New Testament books
-- 📖 **Greek Lexicon** - Click any Greek word for instant definitions with Strong's numbers
-- 🤖 **AI Chat** - Ask questions about Greek grammar, theology, and word meanings
-- 💬 **Conversation History** - Auto-saved chat history for continued study
-- 📱 **Mobile Responsive** - Works beautifully on phones, tablets, and desktops
-- 🔐 **User Authentication** - Secure JWT-based login and registration
-- 🌐 **Offline AI Option** - Use local Ollama or cloud-based Gemini
-- 🐳 **Docker Ready** - One-command deployment with Docker Compose
+- 🔍 **Verse Lookup** - Search all **13,551 Greek NT verses** (SBLGNT) with English translation (WEB)
+- 📖 **Greek Lexicon** - Click any Greek word for instant definitions with **5,624 Strong's entries**
+- 🤖 **AI Chat** - Real-time streaming responses with Ollama (local) or Gemini (cloud)
+- 💬 **Conversation History** - Auto-saved chat history with SQLite persistence
+- 📱 **Mobile Responsive** - Tab navigation optimized for phones, tablets, and desktops
+- 🔐 **User Authentication** - Secure JWT-based login with bcrypt password hashing
+- 🎨 **Enhanced Greek Fonts** - Beautiful typography with Noto Serif and Noto Sans
+- 🐳 **Docker Ready** - One-command deployment with multi-stage builds
 
 ## 🚀 Quick Start (Docker - Recommended)
 
@@ -24,7 +35,7 @@ The fastest way to get started:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/ai_gospel_parser.git
+git clone https://github.com/Amazingninjas/ai_gospel_parser.git
 cd ai_gospel_parser
 
 # 2. Configure environment
@@ -71,7 +82,7 @@ docker-compose up -d
 
 2. **Clone and Configure**
    ```bash
-   git clone https://github.com/yourusername/ai_gospel_parser.git
+   git clone https://github.com/Amazingninjas/ai_gospel_parser.git
    cd ai_gospel_parser
 
    # Copy environment file
@@ -199,7 +210,7 @@ Interactive API docs: http://localhost:8000/docs
 
 ```bash
 # On production server
-git clone https://github.com/yourusername/ai_gospel_parser.git
+git clone https://github.com/Amazingninjas/ai_gospel_parser.git
 cd ai_gospel_parser
 
 # Configure
@@ -257,11 +268,28 @@ A: Yes with Ollama! Everything runs locally.
 **Q: Is it free?**
 A: Yes! Ollama is free. Gemini has costs (~$0.01-0.05 per conversation).
 
+## 📹 Demo Video
+
+**Watch the full demo:** [AI Gospel Parser Demo](https://youtu.be/YOUR_VIDEO_ID)
+
+*Coming soon! Video walkthrough showing verse lookup, lexicon, and AI chat features.*
+
+## 📊 Project Stats
+
+- **13,551** Greek NT verses (SBLGNT)
+- **5,624** Strong's lexicon entries
+- **16** API endpoints (15 REST + 1 WebSocket)
+- **21** integration tests
+- **9** React components
+- **5** custom React hooks
+
 ## 📞 Support
 
 - **Documentation:** See `docs/` folder
-- **Issues:** [GitHub Issues](https://github.com/yourusername/ai_gospel_parser/issues)
+- **Issues:** [GitHub Issues](https://github.com/Amazingninjas/ai_gospel_parser/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/Amazingninjas/ai_gospel_parser/discussions)
 
 ---
 
 **Built with ❤️ for Greek New Testament study**
+*Developed with Claude Sonnet 4.5*
