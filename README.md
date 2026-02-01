@@ -8,7 +8,7 @@
 [![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://www.docker.com/)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Amazingninjas/ai_gospel_parser/releases)
 
-**📹 [Watch Demo Video](#demo-video)** | **🚀 [Quick Start](#-quick-start-docker---recommended)** | **📖 [Documentation](#-documentation)**
+**📹 [Watch Demo Video](#demo-video)** | **🚀 [One-Click Installer](#-one-click-installer-easiest)** | **🐳 [Docker Setup](#-docker-setup-recommended)** | **📖 [Documentation](#-documentation)**
 
 ## 📸 Screenshots
 
@@ -26,10 +26,42 @@
 - 💬 **Conversation History** - Auto-saved chat history with SQLite persistence
 - 📱 **Mobile Responsive** - Tab navigation optimized for phones, tablets, and desktops
 - 🔐 **User Authentication** - Secure JWT-based login with bcrypt password hashing
+- 🔒 **Password Reset** - Email-based password recovery with token expiration
 - 🎨 **Enhanced Greek Fonts** - Beautiful typography with Noto Serif and Noto Sans
 - 🐳 **Docker Ready** - One-command deployment with multi-stage builds
+- ✨ **One-Click Install** - Smart installers for non-technical users
 
-## 🚀 Quick Start (Docker - Recommended)
+## 🎯 One-Click Installer (Easiest)
+
+**Perfect for non-technical users!** No command line knowledge required.
+
+### Windows
+1. Download [`portable-installation/install-windows.ps1`](portable-installation/install-windows.ps1)
+2. Right-click → **"Run with PowerShell"**
+3. Wait 10-15 minutes ☕
+4. Browser opens automatically!
+
+### macOS
+1. Download [`portable-installation/install-macos.sh`](portable-installation/install-macos.sh)
+2. Double-click (or drag to Terminal)
+3. Wait 10-15 minutes ☕
+4. Browser opens automatically!
+
+### Linux
+```bash
+bash portable-installation/install-linux.sh
+```
+
+**What the installer does:**
+- ✅ Checks and installs Docker (if needed)
+- ✅ Checks and installs Git (if needed)
+- ✅ Clones the repository
+- ✅ Starts the application
+- ✅ Opens http://localhost:3000 in your browser
+
+**📖 Full instructions:** See [`portable-installation/START-HERE.txt`](portable-installation/START-HERE.txt)
+
+## 🐳 Docker Setup (Recommended)
 
 The fastest way to get started:
 
@@ -58,11 +90,14 @@ docker-compose up -d
 
 ## 📋 Prerequisites
 
-### Option 1: Docker (Easiest)
+### Option 1: One-Click Installer (No Prerequisites!)
+The smart installer automatically installs everything for you.
+
+### Option 2: Docker (Manual)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) or Docker Engine
 - [Ollama](https://ollama.ai) (for local AI) **or** Gemini API key
 
-### Option 2: Manual Installation
+### Option 3: Manual Installation
 - Python 3.12 or higher
 - Node.js 20.19 or higher
 - Ollama (for local AI) **or** Gemini API key
@@ -169,7 +204,7 @@ ai_gospel_parser/
 ├── backend/                 # FastAPI backend
 │   ├── main.py             # Entry point
 │   ├── models/             # Database models
-│   ├── routers/            # API endpoints (16 total)
+│   ├── routers/            # API endpoints (18 total)
 │   ├── services/           # Business logic
 │   └── tests/              # 21 integration tests
 ├── frontend/               # React frontend
@@ -177,6 +212,11 @@ ai_gospel_parser/
 │       ├── components/     # UI components
 │       ├── hooks/          # Custom React hooks
 │       └── pages/          # Page components
+├── portable-installation/  # One-click installers
+│   ├── install-windows.ps1 # Windows installer
+│   ├── install-macos.sh    # macOS installer
+│   ├── install-linux.sh    # Linux installer
+│   └── START-HERE.txt      # Quick start guide
 └── docker-compose.yml      # Docker orchestration
 ```
 
@@ -199,6 +239,8 @@ Interactive API docs: http://localhost:8000/docs
 **Key Endpoints:**
 - `POST /api/auth/register` - Create account
 - `POST /api/auth/login` - Login
+- `POST /api/auth/forgot-password` - Request password reset
+- `POST /api/auth/reset-password` - Reset password with token
 - `GET /api/verses/{reference}` - Lookup verse
 - `GET /api/lexicon/strongs/{number}` - Lexicon entry
 - `WS /api/chat/stream` - AI chat
@@ -225,6 +267,7 @@ See [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) for complete guide.
 
 ## 📚 Documentation
 
+- **[portable-installation/START-HERE.txt](portable-installation/START-HERE.txt)** - One-click installer guide
 - **[USER_GUIDE.md](USER_GUIDE.md)** - Complete user guide
 - **[QUICK_START.md](QUICK_START.md)** - Quick reference
 - **[DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)** - Deployment guide
@@ -256,8 +299,11 @@ MIT License - see [LICENSE](LICENSE) file.
 
 ## 💡 FAQ
 
+**Q: I'm not technical. Can I still use this?**
+A: Absolutely! Use the one-click installer - it handles everything automatically.
+
 **Q: Do I need Ollama?**
-A: You can use Ollama (local, free) or Gemini (cloud, API key required).
+A: You can use Ollama (local, free) or Gemini (cloud, API key required). The one-click installer guides you through this.
 
 **Q: How much RAM is needed?**
 A: Minimum 4GB, recommended 8GB+ for Ollama.
@@ -267,6 +313,9 @@ A: Yes with Ollama! Everything runs locally.
 
 **Q: Is it free?**
 A: Yes! Ollama is free. Gemini has costs (~$0.01-0.05 per conversation).
+
+**Q: How long does installation take?**
+A: 10-15 minutes for first-time setup (Docker image download). Subsequent starts take ~30 seconds.
 
 ## 📹 Demo Video
 
@@ -278,10 +327,12 @@ A: Yes! Ollama is free. Gemini has costs (~$0.01-0.05 per conversation).
 
 - **13,551** Greek NT verses (SBLGNT)
 - **5,624** Strong's lexicon entries
-- **16** API endpoints (15 REST + 1 WebSocket)
+- **18** API endpoints (17 REST + 1 WebSocket)
 - **21** integration tests
-- **9** React components
+- **11** React components
 - **5** custom React hooks
+- **3** one-click installers (Windows, macOS, Linux)
+- **9** reference texts integrated
 
 ## 📞 Support
 
