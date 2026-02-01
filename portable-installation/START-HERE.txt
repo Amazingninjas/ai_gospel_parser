@@ -1,0 +1,78 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║          AI GOSPEL PARSER - ONE-CLICK INSTALLER                ║
+║                                                                ║
+║  Greek New Testament Analysis with AI-Powered Insights        ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+QUICK START - CHOOSE YOUR SYSTEM:
+==================================
+
+┌────────────────────────────────────────────────────────────┐
+│  🪟 WINDOWS USERS                                          │
+│                                                             │
+│  1. Right-click: install-windows.ps1                       │
+│  2. Select: "Run with PowerShell"                          │
+│  3. Click "Yes" if asked for Administrator permission      │
+│  4. Wait 10-15 minutes                                      │
+│  5. Browser opens automatically!                           │
+└────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────┐
+│  🍎 macOS USERS                                            │
+│                                                             │
+│  1. Double-click: install-macos.sh                         │
+│     (Or drag it into Terminal)                             │
+│  2. Enter password when prompted                           │
+│  3. Wait 10-15 minutes                                      │
+│  4. Browser opens automatically!                           │
+└────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────┐
+│  🐧 LINUX USERS                                            │
+│                                                             │
+│  1. Open Terminal                                           │
+│  2. cd to this folder                                       │
+│  3. Run: bash install-linux.sh                             │
+│  4. Enter password when prompted                           │
+│  5. Wait 10-15 minutes                                      │
+│  6. Browser opens automatically!                           │
+└────────────────────────────────────────────────────────────┘
+
+THAT'S IT! The installer does everything else automatically.
+
+═══════════════════════════════════════════════════════════════
+
+WHAT HAPPENS DURING INSTALLATION:
+==================================
+✓ Checks if Docker is installed (installs if needed)
+✓ Checks if Git is installed (installs if needed)
+✓ Downloads AI Gospel Parser
+✓ Starts the application
+✓ Opens http://localhost:3000 in your browser
+
+FIRST TIME USING THE APP:
+==========================
+1. Click "Register" to create an account
+2. Use a password with 8+ characters
+3. Start exploring Greek NT verses!
+
+FEATURES YOU'LL GET:
+====================
+✓ 13,551 Greek NT verses (SBLGNT)
+✓ Strong's Greek Lexicon
+✓ Click any Greek word for instant definitions
+✓ AI chat assistant for deeper study
+✓ Multiple scholarly reference texts
+
+NEED HELP?
+==========
+Read: README-SMART-INSTALLER.txt (detailed instructions)
+Visit: https://github.com/Amazingninjas/ai_gospel_parser
+
+═══════════════════════════════════════════════════════════════
+
+              DEVELOPED WITH ❤️ FOR BIBLICAL SCHOLARS
+
+═══════════════════════════════════════════════════════════════

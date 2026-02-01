@@ -1,0 +1,99 @@
+AI GOSPEL PARSER - QUICK START GUIDE
+=====================================
+
+Choose your operating system and follow the appropriate guide:
+
+┌─────────────────────────────────────────────────────────┐
+│  WINDOWS - See INSTALL-WINDOWS.txt                      │
+│  macOS   - See INSTALL-MACOS.txt                        │
+│  Linux   - See INSTALL-LINUX.txt                        │
+└─────────────────────────────────────────────────────────┘
+
+SUPER QUICK START (if you already have Docker & Git):
+======================================================
+
+WINDOWS (Command Prompt):
+  git clone https://github.com/Amazingninjas/ai_gospel_parser.git
+  cd ai_gospel_parser
+  docker-compose up -d
+  start http://localhost:3000
+
+macOS / Linux (Terminal):
+  git clone https://github.com/Amazingninjas/ai_gospel_parser.git
+  cd ai_gospel_parser
+  docker-compose up -d
+  open http://localhost:3000      # macOS
+  xdg-open http://localhost:3000  # Linux
+
+FIRST TIME SETUP:
+=================
+1. Visit http://localhost:3000
+2. Click "Register"
+3. Create account (password must be 8+ characters)
+4. Start exploring Greek NT verses!
+
+FEATURES:
+=========
+✓ 13,551 Greek NT verses (SBLGNT)
+✓ Strong's Greek Lexicon (5,624 entries)
+✓ Interactive clickable Greek text
+✓ AI-powered chat assistant
+✓ Password reset functionality
+✓ Conversation history
+
+REFERENCE TEXTS:
+================
+1. Thayer's Greek Lexicon
+2. Moulton-Milligan Vocabulary
+3. Josephus' Antiquities
+4. Robertson's Word Pictures (partial - metadata issues)
+5. Vincent's Word Studies
+6. Robertson's Grammar
+7. Strong's Greek Lexicon
+8. SBLGNT Greek New Testament
+9. World English Bible
+
+ACCESS URLS:
+============
+Frontend:    http://localhost:3000
+Backend API: http://localhost:8000/docs
+
+COMMON COMMANDS:
+================
+Start:    docker-compose up -d
+Stop:     docker-compose down
+Restart:  docker-compose restart
+Logs:     docker-compose logs -f
+Update:   git pull && docker-compose up -d --build
+
+SYSTEM REQUIREMENTS:
+====================
+- Docker Desktop (Windows/Mac) or Docker Engine (Linux)
+- Git
+- 8GB RAM minimum (16GB recommended)
+- 10GB free disk space
+- Internet connection (first-time only)
+
+SUPPORT:
+========
+GitHub:  https://github.com/Amazingninjas/ai_gospel_parser
+Issues:  https://github.com/Amazingninjas/ai_gospel_parser/issues
+License: Open Source
+
+TROUBLESHOOTING:
+================
+Port already in use:
+  - Stop other apps using port 3000 or 8000
+  - Or change ports in docker-compose.yml
+
+Containers won't start:
+  docker-compose logs backend
+  docker-compose logs frontend
+
+Can't connect to Docker:
+  - Make sure Docker Desktop is running
+  - Check Docker status: docker info
+
+Need to reset everything:
+  docker-compose down
+  docker-compose up -d --build

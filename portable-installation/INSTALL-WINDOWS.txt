@@ -1,0 +1,80 @@
+AI GOSPEL PARSER - WINDOWS INSTALLATION
+========================================
+
+REQUIREMENTS:
+-------------
+1. Docker Desktop for Windows (download: https://www.docker.com/products/docker-desktop)
+2. Git for Windows (download: https://git-scm.com/download/win)
+
+INSTALLATION STEPS:
+-------------------
+
+1. Install Docker Desktop
+   - Download and install from https://www.docker.com/products/docker-desktop
+   - Start Docker Desktop and wait for it to finish starting
+   - You should see the Docker icon in your system tray
+
+2. Install Git (if not already installed)
+   - Download from https://git-scm.com/download/win
+   - Use default installation options
+
+3. Open Command Prompt or PowerShell
+   - Press Windows key + R
+   - Type: cmd
+   - Press Enter
+
+4. Navigate to where you want to install (optional)
+   cd C:\Users\%USERNAME%\Documents
+
+5. Clone the repository
+   git clone https://github.com/Amazingninjas/ai_gospel_parser.git
+
+6. Navigate into the folder
+   cd ai_gospel_parser
+
+7. Start the application
+   docker-compose up -d
+
+8. Wait for Docker to download and build (first time only - may take 5-10 minutes)
+
+9. Access the application
+   - Open your browser
+   - Go to: http://localhost:3000
+
+STOPPING THE APPLICATION:
+--------------------------
+cd C:\Users\%USERNAME%\Documents\ai_gospel_parser
+docker-compose down
+
+RESTARTING THE APPLICATION:
+---------------------------
+cd C:\Users\%USERNAME%\Documents\ai_gospel_parser
+docker-compose up -d
+
+UPDATING TO LATEST VERSION:
+----------------------------
+cd C:\Users\%USERNAME%\Documents\ai_gospel_parser
+git pull origin main
+docker-compose up -d --build
+
+TROUBLESHOOTING:
+----------------
+If containers won't start:
+  docker-compose logs backend
+  docker-compose logs frontend
+
+If you get permission errors:
+  - Make sure Docker Desktop is running
+  - Run Command Prompt as Administrator
+
+UNINSTALL:
+----------
+cd C:\Users\%USERNAME%\Documents\ai_gospel_parser
+docker-compose down
+cd ..
+rmdir /s ai_gospel_parser
+
+ACCESS URLS:
+------------
+Frontend: http://localhost:3000
+Backend API: http://localhost:8000/docs

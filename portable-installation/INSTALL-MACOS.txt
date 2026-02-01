@@ -1,0 +1,97 @@
+AI GOSPEL PARSER - macOS INSTALLATION
+======================================
+
+REQUIREMENTS:
+-------------
+1. Docker Desktop for Mac (download: https://www.docker.com/products/docker-desktop)
+2. Git (usually pre-installed, or install via Homebrew)
+
+INSTALLATION STEPS:
+-------------------
+
+1. Install Docker Desktop
+   - Download from https://www.docker.com/products/docker-desktop
+   - Drag Docker.app to Applications folder
+   - Start Docker Desktop
+   - Wait for it to finish starting (whale icon in menu bar)
+
+2. Check if Git is installed
+   git --version
+   
+   If not installed, install via Homebrew:
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   brew install git
+
+3. Open Terminal
+   - Press Cmd + Space
+   - Type: Terminal
+   - Press Enter
+
+4. Navigate to where you want to install (optional)
+   cd ~/Documents
+
+5. Clone the repository
+   git clone https://github.com/Amazingninjas/ai_gospel_parser.git
+
+6. Navigate into the folder
+   cd ai_gospel_parser
+
+7. Start the application
+   docker-compose up -d
+
+8. Wait for Docker to download and build (first time only - may take 5-10 minutes)
+
+9. Access the application
+   - Open your browser
+   - Go to: http://localhost:3000
+
+STOPPING THE APPLICATION:
+--------------------------
+cd ~/Documents/ai_gospel_parser
+docker-compose down
+
+RESTARTING THE APPLICATION:
+---------------------------
+cd ~/Documents/ai_gospel_parser
+docker-compose up -d
+
+UPDATING TO LATEST VERSION:
+----------------------------
+cd ~/Documents/ai_gospel_parser
+git pull origin main
+docker-compose up -d --build
+
+TROUBLESHOOTING:
+----------------
+If containers won't start:
+  docker-compose logs backend
+  docker-compose logs frontend
+
+If you get permission errors:
+  - Make sure Docker Desktop is running (whale icon in menu bar)
+  - Try running with sudo:
+    sudo docker-compose up -d
+
+Check Docker status:
+  docker info
+
+UNINSTALL:
+----------
+cd ~/Documents/ai_gospel_parser
+docker-compose down
+cd ..
+rm -rf ai_gospel_parser
+
+ACCESS URLS:
+------------
+Frontend: http://localhost:3000
+Backend API: http://localhost:8000/docs
+
+QUICK START SCRIPT:
+-------------------
+You can also create a quick launcher:
+  echo 'cd ~/Documents/ai_gospel_parser && docker-compose up -d' > ~/start-gospel-parser.sh
+  chmod +x ~/start-gospel-parser.sh
+  
+Then just run:
+  ~/start-gospel-parser.sh

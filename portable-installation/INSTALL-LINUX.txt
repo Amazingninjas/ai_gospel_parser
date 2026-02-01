@@ -1,0 +1,133 @@
+AI GOSPEL PARSER - LINUX INSTALLATION
+======================================
+
+REQUIREMENTS:
+-------------
+1. Docker Engine + Docker Compose
+2. Git
+
+INSTALLATION STEPS:
+-------------------
+
+1. Install Docker (Ubuntu/Debian)
+   
+   # Update package index
+   sudo apt-get update
+   
+   # Install prerequisites
+   sudo apt-get install -y ca-certificates curl gnupg lsb-release
+   
+   # Add Docker's official GPG key
+   sudo mkdir -p /etc/apt/keyrings
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+   
+   # Set up repository
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   
+   # Install Docker Engine
+   sudo apt-get update
+   sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+   
+   # Add your user to docker group (to run without sudo)
+   sudo usermod -aG docker $USER
+   newgrp docker
+
+2. Install Git (if not already installed)
+   sudo apt-get install -y git
+
+3. Navigate to where you want to install
+   cd ~
+
+4. Clone the repository
+   git clone https://github.com/Amazingninjas/ai_gospel_parser.git
+
+5. Navigate into the folder
+   cd ai_gospel_parser
+
+6. Start the application
+   docker compose up -d
+
+7. Wait for Docker to download and build (first time only - may take 5-10 minutes)
+
+8. Access the application
+   - Open your browser
+   - Go to: http://localhost:3000
+
+STOPPING THE APPLICATION:
+--------------------------
+cd ~/ai_gospel_parser
+docker compose down
+
+RESTARTING THE APPLICATION:
+---------------------------
+cd ~/ai_gospel_parser
+docker compose up -d
+
+UPDATING TO LATEST VERSION:
+----------------------------
+cd ~/ai_gospel_parser
+git pull origin main
+docker compose up -d --build
+
+TROUBLESHOOTING:
+----------------
+If containers won't start:
+  docker compose logs backend
+  docker compose logs frontend
+
+If you get permission errors:
+  # Make sure you added your user to docker group
+  sudo usermod -aG docker $USER
+  newgrp docker
+  
+  # Or run with sudo
+  sudo docker compose up -d
+
+Check Docker status:
+  docker info
+
+UNINSTALL:
+----------
+cd ~/ai_gospel_parser
+docker compose down
+cd ..
+rm -rf ai_gospel_parser
+
+# Remove Docker (if desired)
+sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+
+ACCESS URLS:
+------------
+Frontend: http://localhost:3000
+Backend API: http://localhost:8000/docs
+
+SYSTEMD SERVICE (Auto-start on boot):
+--------------------------------------
+Create service file:
+  sudo nano /etc/systemd/system/gospel-parser.service
+
+Paste this content:
+  [Unit]
+  Description=AI Gospel Parser
+  Requires=docker.service
+  After=docker.service
+
+  [Service]
+  Type=oneshot
+  RemainAfterExit=yes
+  WorkingDirectory=/home/YOUR_USERNAME/ai_gospel_parser
+  ExecStart=/usr/bin/docker compose up -d
+  ExecStop=/usr/bin/docker compose down
+
+  [Install]
+  WantedBy=multi-user.target
+
+Enable and start:
+  sudo systemctl daemon-reload
+  sudo systemctl enable gospel-parser.service
+  sudo systemctl start gospel-parser.service
+
+Check status:
+  sudo systemctl status gospel-parser.service
