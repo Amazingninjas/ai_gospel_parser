@@ -6,12 +6,15 @@ Password hashing, JWT token generation, and user authentication.
 from datetime import datetime, timedelta
 from typing import Optional
 import hashlib
+import secrets
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
 from config import settings
 from models.user import User
+from models.password_reset_token import PasswordResetToken
+
 
 
 # Password hashing
@@ -154,3 +157,95 @@ class AuthService:
     def get_user_by_id(db: Session, user_id: int) -> Optional[User]:
         """Get a user by ID"""
         return db.query(User).filter(User.id == user_id).first()
+
+    @staticmethod
+    def create_password_reset_token(db: Session, email: str) -> Optional[str]:
+        """
+        Create a password reset token for a user.
+
+        Args:
+            db: Database session
+            email: User's email
+
+        Returns:
+            The reset token string or None if user not found.
+        """
+        user = AuthService.get_user_by_email(db, email)
+        if not user:
+            return None
+
+        # Generate a secure, URL-safe token
+        token = secrets.token_urlsafe(32)
+        
+        # Set expiration for 1 hour from now
+        expires_at = datetime.utcnow() + timedelta(hours=1)
+
+        # Store the token in the database
+        token_record = PasswordResetToken(
+            email=email,
+            token=token,
+            expires_at=expires_at
+        )
+        db.add(token_record)
+        db.commit()
+
+        return token
+
+    @staticmethod
+    def verify_reset_token(db: Session, token: str) -> Optional[str]:
+        """
+        Verify a password reset token.
+
+        Args:
+            db: Database session
+            token: The reset token string
+
+        Returns:
+            The user's email if token is valid and not expired, otherwise None.
+        """
+        token_record = db.query(PasswordResetToken).filter(PasswordResetToken.token == token).first()
+
+        if not token_record:
+            return None
+
+        if token_record.is_expired():
+            # Clean up expired token
+            db.delete(token_record)
+            db.commit()
+            return None
+
+        return token_record.email
+
+    @staticmethod
+    def reset_password(db: Session, token: str, new_password: str) -> Optional[User]:
+        """
+        Reset a user's password using a valid token.
+
+        Args:
+            db: Database session
+            token: The reset token string
+            new_password: The new plain text password
+
+        Returns:
+            The updated User object or None if token is invalid.
+        """
+        email = AuthService.verify_reset_token(db, token)
+        if not email:
+            return None
+
+        user = AuthService.get_user_by_email(db, email)
+        if not user:
+            # Should not happen if token is valid, but good to check
+            return None
+
+        # Update password
+        user.hashed_password = AuthService.get_password_hash(new_password)
+        
+        # Invalidate the token by deleting it
+        token_record = db.query(PasswordResetToken).filter(PasswordResetToken.token == token).first()
+        if token_record:
+            db.delete(token_record)
+        
+        db.commit()
+
+        return user

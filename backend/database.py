@@ -38,7 +38,7 @@ def get_db():
 def init_db():
     """Initialize database tables"""
     # Import models here to avoid circular imports
-    from models import user, conversation
+    from models import user, conversation, password_reset_token
 
     Base.metadata.create_all(bind=engine)
     print("✓ Database tables created")

@@ -76,3 +76,29 @@ class UserResponse(BaseModel):
 class TokenData(BaseModel):
     """Data extracted from JWT token"""
     email: Optional[str] = None
+
+
+class ForgotPasswordRequest(BaseModel):
+    """Request schema for initiating a password reset"""
+    email: EmailStr = Field(..., description="The email address to send the reset link to")
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "email": "user@example.com"
+            }
+        }
+
+
+class ResetPasswordRequest(BaseModel):
+    """Request schema for resetting a password with a token"""
+    token: str = Field(..., description="The password reset token from the email link")
+    new_password: str = Field(..., min_length=8, description="New password (min 8 characters)")
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "token": "a-very-long-and-secure-reset-token",
+                "new_password": "newsecurepassword123"
+            }
+        }

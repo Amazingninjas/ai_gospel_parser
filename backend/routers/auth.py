@@ -8,10 +8,15 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from database import get_db
-from schemas.user import UserRegister, UserLogin, Token, UserResponse, TokenData
+from schemas.user import (
+    UserRegister, UserLogin, Token, UserResponse, TokenData,
+    ForgotPasswordRequest, ResetPasswordRequest
+)
 from schemas.verse import ErrorResponse
 from services.auth_service import AuthService
+from services.email_service import send_password_reset_email
 from models.user import User
+
 
 
 router = APIRouter()
@@ -204,3 +209,66 @@ async def logout():
         Success message
     """
     return {"message": "Successfully logged out. Delete token from client storage."}
+
+
+@router.post(
+    "/forgot-password",
+    status_code=status.HTTP_200_OK,
+    summary="Request a password reset",
+    description="""
+    Initiate the password reset process for a user.
+
+    This endpoint will send a password reset link to the user's email address
+    if the account exists. To prevent user enumeration, it will always return
+    a success response, even if the email is not found in the database.
+    """
+)
+async def forgot_password(
+    request: ForgotPasswordRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Request a password reset link.
+
+    Args:
+        request: Request containing the user's email
+        db: Database session
+    """
+    token = AuthService.create_password_reset_token(db, email=request.email)
+
+    if token:
+        # This function handles the logic for sending email or logging to console
+        send_password_reset_email(email=request.email, token=token)
+
+    # Always return a success message to prevent user enumeration
+    return {"message": "If an account with that email exists, a password reset link has been sent."}
+
+
+@router.post(
+    "/reset-password",
+    status_code=status.HTTP_200_OK,
+    summary="Reset password with a token",
+    description="""
+    Reset the user's password using a valid token from the password reset email.
+    """
+)
+async def reset_password(
+    request: ResetPasswordRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Reset user's password.
+
+    Args:
+        request: Request containing the reset token and new password
+        db: Database session
+    """
+    user = AuthService.reset_password(db, token=request.token, new_password=request.new_password)
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid or expired password reset token."
+        )
+
+    return {"message": "Password has been reset successfully."}

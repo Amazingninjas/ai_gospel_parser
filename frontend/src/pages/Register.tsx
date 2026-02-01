@@ -21,8 +21,8 @@ const Register = () => {
     }
 
     // Validate password length
-    if (password.length < 6) {
-      setValidationError('Password must be at least 6 characters');
+    if (password.length < 8) {
+      setValidationError('Password must be at least 8 characters');
       return;
     }
 
@@ -85,7 +85,7 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              minLength={6}
+              minLength={8}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••"
             />
@@ -100,7 +100,7 @@ const Register = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              minLength={6}
+              minLength={8}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••"
             />
