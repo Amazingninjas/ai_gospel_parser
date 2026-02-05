@@ -36,20 +36,24 @@
 **Perfect for non-technical users!** No command line knowledge required.
 
 ### Windows
-1. Download [`portable-installation/install-windows.ps1`](portable-installation/install-windows.ps1)
-2. Right-click → **"Run with PowerShell"**
-3. Wait 10-15 minutes ☕
-4. Browser opens automatically!
+
+[⬇️ Download install-windows.ps1](https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/install-windows.ps1)
+
+Right-click the downloaded file → **Run as Administrator**
 
 ### macOS
-1. Download [`portable-installation/install-macos.sh`](portable-installation/install-macos.sh)
-2. Double-click (or drag to Terminal)
-3. Wait 10-15 minutes ☕
-4. Browser opens automatically!
+
+[⬇️ Download install-macos.sh](https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/install-macos.sh)
+
+Or run in one command:
+```bash
+curl -fsSL https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/install-macos.sh | bash
+```
 
 ### Linux
+
 ```bash
-bash portable-installation/install-linux.sh
+curl -fsSL https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/install-linux.sh | bash
 ```
 
 **What the installer does:**
@@ -59,7 +63,8 @@ bash portable-installation/install-linux.sh
 - ✅ Starts the application
 - ✅ Opens http://localhost:3000 in your browser
 
-**📖 Full instructions:** See [`portable-installation/START-HERE.txt`](portable-installation/START-HERE.txt)
+**📖 Full instructions:** See [START-HERE.txt](https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/START-HERE.txt)
+
 
 ## 🐳 Docker Setup (Recommended)
 
