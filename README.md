@@ -39,7 +39,12 @@
 
 [⬇️ Download install-windows.ps1](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.0/install-windows.ps1)
 
-Right-click the downloaded file → **Run as Administrator**
+**How to run:**
+1. Right-click **Start** → **Windows PowerShell (Admin)** or **Terminal (Admin)**
+2. Navigate to Downloads: `cd $env:USERPROFILE\Downloads`
+3. Run the installer: `powershell -ExecutionPolicy Bypass -File .\install-windows.ps1`
+
+The installer will check for Docker and Git, then set everything up automatically.
 
 ### macOS
 
