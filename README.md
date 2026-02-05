@@ -37,23 +37,23 @@
 
 ### Windows
 
-[⬇️ Download install-windows.ps1](https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/install-windows.ps1)
+[⬇️ Download install-windows.ps1](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.0/install-windows.ps1)
 
 Right-click the downloaded file → **Run as Administrator**
 
 ### macOS
 
-[⬇️ Download install-macos.sh](https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/install-macos.sh)
+[⬇️ Download install-macos.sh](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.0/install-macos.sh)
 
 Or run in one command:
 ```bash
-curl -fsSL https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/install-macos.sh | bash
+curl -fsSL https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.0/install-macos.sh | bash
 ```
 
 ### Linux
 
 ```bash
-curl -fsSL https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/install-linux.sh | bash
+curl -fsSL https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.0/install-linux.sh | bash
 ```
 
 **What the installer does:**
@@ -63,7 +63,7 @@ curl -fsSL https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-i
 - ✅ Starts the application
 - ✅ Opens http://localhost:3000 in your browser
 
-**📖 Full instructions:** See [START-HERE.txt](https://github.com/Amazingninjas/ai_gospel_parser/raw/main/portable-installation/START-HERE.txt)
+**📖 Full instructions:** See [portable-installation/START-HERE.txt](portable-installation/START-HERE.txt)
 
 
 ## 🐳 Docker Setup (Recommended)
