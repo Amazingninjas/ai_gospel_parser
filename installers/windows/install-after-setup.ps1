@@ -38,7 +38,7 @@ try {
             Write-Host "After Docker starts, run: launch.bat" -ForegroundColor Cyan
             Write-Host ""
             Write-Host "Press any key to exit..."
-            $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+            $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
             exit 1
         }
     } else {
@@ -103,7 +103,7 @@ if (Test-Path $repoPath) {
             winget install --id Git.Git -e --source winget --accept-package-agreements --accept-source-agreements
 
             # Refresh PATH
-            $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+            $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
         } else {
             Write-Host "  ✗ Could not install Git automatically" -ForegroundColor Red
             Write-Host ""
@@ -111,7 +111,7 @@ if (Test-Path $repoPath) {
             Write-Host "  https://git-scm.com/download/win" -ForegroundColor White
             Write-Host ""
             Write-Host "Press any key to exit..."
-            $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+            $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
             exit 1
         }
     }
@@ -180,4 +180,4 @@ Write-Host "You can also use the Start Menu shortcuts!" -ForegroundColor Cyan
 Write-Host ""
 
 Write-Host "Press any key to exit..."
-$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
