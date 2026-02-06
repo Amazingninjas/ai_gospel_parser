@@ -6,7 +6,8 @@
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![Node.js 20+](https://img.shields.io/badge/node-20+-green.svg)](https://nodejs.org/)
 [![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://www.docker.com/)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Amazingninjas/ai_gospel_parser/releases)
+[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://github.com/Amazingninjas/ai_gospel_parser/releases)
+[![Installers](https://img.shields.io/badge/installers-Windows%20%7C%20macOS%20%7C%20Linux-success.svg)](https://github.com/Amazingninjas/ai_gospel_parser/releases/latest)
 
 **📹 [Watch Demo Video](#demo-video)** | **🚀 [One-Click Installer](#-one-click-installer-easiest)** | **🐳 [Docker Setup](#-docker-setup-recommended)** | **📖 [Documentation](#-documentation)**
 
@@ -33,42 +34,76 @@
 
 ## 🎯 One-Click Installer (Easiest)
 
-**Perfect for non-technical users!** No command line knowledge required.
+**Perfect for non-technical users!** No command line knowledge required - just download and double-click!
 
-### Windows
+### 🪟 Windows
 
-[⬇️ Download install-windows.ps1](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.0/install-windows.ps1)
+**[⬇️ Download Windows Installer](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.1/AI-Gospel-Parser-Windows-Installer-1.0.1.tar.gz)** (3.1 KB)
 
-**How to run:**
-1. Right-click **Start** → **Windows PowerShell (Admin)** or **Terminal (Admin)**
-2. Navigate to Downloads: `cd $env:USERPROFILE\Downloads`
-3. Run the installer: `powershell -ExecutionPolicy Bypass -File .\install-windows.ps1`
+**How to install:**
+1. Download and extract the archive
+2. **Double-click** `AI-Gospel-Parser-Installer.vbs`
+3. Click "Yes" when prompted for administrator permission
+4. Wait 10-15 minutes (first-time setup)
+5. Browser opens automatically!
 
-The installer will check for Docker and Git, then set everything up automatically.
+**That's it!** No PowerShell, no commands, no technical knowledge needed.
 
-### macOS
+---
 
-[⬇️ Download install-macos.sh](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.0/install-macos.sh)
+### 🍎 macOS
 
-Or run in one command:
-```bash
-curl -fsSL https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.0/install-macos.sh | bash
-```
+**[⬇️ Download macOS Installer](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.1/AI-Gospel-Parser-macOS-Installer-1.0.1.tar.gz)** (2.9 KB)
 
-### Linux
+**How to install:**
+1. Download and extract the archive
+2. **Double-click** `AI Gospel Parser Installer.app`
+3. Click "Install" in the welcome dialog
+4. Enter your password when prompted
+5. Wait 10-15 minutes (first-time setup)
+6. Browser opens automatically!
 
-```bash
-curl -fsSL https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.0/install-linux.sh | bash
-```
+**Native macOS application** with standard password dialogs - no Terminal needed!
 
-**What the installer does:**
-- ✅ Checks and installs Docker (if needed)
-- ✅ Checks and installs Git (if needed)
-- ✅ Clones the repository
-- ✅ Starts the application
-- ✅ Opens http://localhost:3000 in your browser
+---
 
-**📖 Full instructions:** See [portable-installation/START-HERE.txt](portable-installation/START-HERE.txt)
+### 🐧 Linux
+
+**[⬇️ Download Linux Installer](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.1/AI-Gospel-Parser-Linux-Installer-1.0.1.tar.gz)** (3.2 KB)
+
+**How to install:**
+1. Download and extract the archive
+2. Right-click `ai-gospel-parser-installer.desktop` → Properties → Permissions → "Allow executing as program"
+3. **Double-click** the desktop file
+4. Enter your password when prompted
+5. Wait 10-15 minutes (first-time setup)
+6. Browser opens automatically!
+
+**Works with all desktop environments** (GNOME, KDE, XFCE, etc.) - no Terminal commands!
+
+---
+
+### ✨ What the Installer Does
+
+All installers automatically:
+- ✅ Check for Docker Desktop and install if needed
+- ✅ Check for Git and install if needed
+- ✅ Clone the AI Gospel Parser repository
+- ✅ Start the application with Docker Compose
+- ✅ Open http://localhost:3000 in your browser
+
+**Total time:** 10-15 minutes (mostly Docker installation on first run)
+
+### 🆚 Why This is Better
+
+| Old Method | New Method |
+|------------|------------|
+| ❌ Open PowerShell as Admin | ✅ Double-click one file |
+| ❌ Type complex commands | ✅ Click "Yes" to confirm |
+| ❌ Navigate directories | ✅ Everything automatic |
+| ❌ Technical knowledge required | ✅ Anyone can install! |
+
+📖 **Full installer documentation:** [installers/README.md](installers/README.md)
 
 
 ## 🐳 Docker Setup (Recommended)

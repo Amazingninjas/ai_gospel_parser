@@ -1,0 +1,74 @@
+================================================================================
+                    INSTALLATION COMPLETE!
+================================================================================
+
+AI Gospel Parser has been installed successfully!
+
+NEXT STEPS:
+===========
+
+1. The application will now start automatically
+   (This may take 5-10 minutes on first run)
+
+2. Your browser will open to: http://localhost:3000
+
+3. Create an account by clicking "Register"
+
+4. Start studying Greek New Testament verses!
+
+
+QUICK REFERENCE:
+================
+
+Start Application:
+  - Use the "AI Gospel Parser" shortcut on your desktop or Start Menu
+  - Or run: launch.bat
+
+Stop Application:
+  - Run: stop.bat
+  - Or: docker-compose down
+
+View Logs:
+  - docker-compose logs
+
+Uninstall:
+  - Use "Add or Remove Programs" in Windows Settings
+  - Or run the uninstaller from the Start Menu
+
+
+FEATURES:
+=========
+
+✓ 13,551 Greek NT verses (SBLGNT)
+✓ 5,624 Strong's Greek Lexicon entries
+✓ Click any Greek word for instant definitions
+✓ AI chat assistant (Ollama or Gemini)
+✓ Conversation history
+✓ Mobile responsive design
+
+
+TROUBLESHOOTING:
+================
+
+If the application doesn't start:
+  1. Make sure Docker Desktop is running
+  2. Check Docker system tray icon (should show "Docker Desktop is running")
+  3. Run: docker-compose up -d
+  4. Check logs: docker-compose logs
+
+If port 3000 or 8000 is already in use:
+  - Stop other applications using those ports
+  - Or edit docker-compose.yml to use different ports
+
+
+DOCUMENTATION:
+==============
+
+Full documentation: README.md (in installation folder)
+GitHub: https://github.com/Amazingninjas/ai_gospel_parser
+Report issues: https://github.com/Amazingninjas/ai_gospel_parser/issues
+
+
+================================================================================
+              ENJOY STUDYING THE GREEK NEW TESTAMENT!
+================================================================================

@@ -1,0 +1,65 @@
+#!/bin/bash
+# ============================================================================
+# AI Gospel Parser - macOS Installer Wrapper
+# ============================================================================
+# This script is the executable for the .app bundle
+# It requests admin privileges and runs the installation
+# ============================================================================
+
+set -e
+
+# Get the directory where this app is located
+SCRIPT_DIR="$(cd "$(dirname "$0")/../Resources" && pwd)"
+INSTALL_SCRIPT="$SCRIPT_DIR/install-macos.sh"
+
+# Check if install script exists
+if [ ! -f "$INSTALL_SCRIPT" ]; then
+    osascript -e 'display alert "Installation Error" message "Could not find install-macos.sh in the app bundle." as critical'
+    exit 1
+fi
+
+# Show welcome dialog
+RESPONSE=$(osascript <<EOF
+tell application "System Events"
+    activate
+    set theResponse to display dialog "Welcome to AI Gospel Parser Installer
+
+This will install:
+• Docker Desktop (if needed)
+• Git (if needed)
+• AI Gospel Parser
+
+Installation may take 10-15 minutes.
+
+Continue?" buttons {"Cancel", "Install"} default button "Install" with icon note
+    return button returned of theResponse
+end tell
+EOF
+)
+
+if [ "$RESPONSE" != "Install" ]; then
+    exit 0
+fi
+
+# Run the installation script with admin privileges
+# This will prompt for password via macOS native dialog
+osascript -e "do shell script \"bash '$INSTALL_SCRIPT'\" with administrator privileges" 2>&1 | tee /tmp/aigospel-install.log
+
+# Check if installation was successful
+if [ ${PIPESTATUS[0]} -eq 0 ]; then
+    osascript -e 'display alert "Installation Complete!" message "AI Gospel Parser has been installed successfully!
+
+Opening browser in 3 seconds..." buttons {"OK"} default button "OK"'
+
+    sleep 3
+    open "http://localhost:3000"
+else
+    osascript -e 'display alert "Installation Failed" message "An error occurred during installation.
+
+Check the log file at:
+/tmp/aigospel-install.log" as critical'
+    open /tmp/aigospel-install.log
+    exit 1
+fi
+
+exit 0

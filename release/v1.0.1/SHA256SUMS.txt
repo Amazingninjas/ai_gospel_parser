@@ -1,0 +1,3 @@
+e7cec229a8051495a91f93fb21cf42fae8458f65d495a62412e7b12d8d4047f5  AI-Gospel-Parser-Linux-Installer-1.0.1.tar.gz
+8e21b09fa6f94c50328056fe1cd751de08cb79701aa7c523e0105388d7e49f7c  AI-Gospel-Parser-Windows-Installer-1.0.1.tar.gz
+32de2c3abe8bb56aa0e494493060c4cdd7043fd0f09707cadd1937840d8b7869  AI-Gospel-Parser-macOS-Installer-1.0.1.tar.gz
