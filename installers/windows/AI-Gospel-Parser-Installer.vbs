@@ -24,19 +24,31 @@ If Not objFSO.FileExists(strPSScript) Then
     WScript.Quit 1
 End If
 
-' Create command to run PowerShell with elevation
-strCommand = "powershell.exe -ExecutionPolicy Bypass -NoProfile -File """ & strPSScript & """"
+' Create PowerShell command that will keep window open even on error
+' Using -Command instead of -File to have better control
+strCommand = "-ExecutionPolicy Bypass -NoProfile -Command """ & _
+             "Set-Location '" & strScriptPath & "'; " & _
+             "try { " & _
+             "  & '" & strPSScript & "' " & _
+             "} catch { " & _
+             "  Write-Host 'Error occurred:' -ForegroundColor Red; " & _
+             "  Write-Host $_.Exception.Message -ForegroundColor Red; " & _
+             "  Write-Host ''; " & _
+             "  Write-Host 'Press any key to exit...' -ForegroundColor Yellow; " & _
+             "  $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown') " & _
+             "}"""
 
 ' Execute with Administrator privileges (UAC prompt will appear)
 Set objShell = CreateObject("Shell.Application")
 objShell.ShellExecute "powershell.exe", _
-                       "-ExecutionPolicy Bypass -NoProfile -File """ & strPSScript & """", _
+                       strCommand, _
                        strScriptPath, _
                        "runas", _
-                       1  ' Show window
+                       1  ' Show window (1 = normal, not hidden)
 
 ' Clean up
 Set objShell = Nothing
 Set objFSO = Nothing
 
+' VBScript exits, PowerShell continues running
 WScript.Quit 0

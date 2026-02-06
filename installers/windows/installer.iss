@@ -6,7 +6,7 @@
 ; ============================================================================
 
 #define MyAppName "AI Gospel Parser"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "Amazing Ninjas"
 #define MyAppURL "https://github.com/Amazingninjas/ai_gospel_parser"
 #define MyAppExeName "launch.bat"
@@ -33,14 +33,14 @@ PrivilegesRequiredOverridesAllowed=dialog
 ; Output settings
 OutputDir=output
 OutputBaseFilename=AI-Gospel-Parser-Setup-{#MyAppVersion}
-SetupIconFile=icon.ico
+; SetupIconFile=icon.ico  ; Commented out - will use default icon
 Compression=lzma2/max
 SolidCompression=yes
 
 ; Modern UI
 WizardStyle=modern
-WizardImageFile=wizard-image.bmp
-WizardSmallImageFile=wizard-small-image.bmp
+; WizardImageFile=wizard-image.bmp  ; Optional - will use default
+; WizardSmallImageFile=wizard-small-image.bmp  ; Optional - will use default
 
 ; License and info files
 LicenseFile=..\..\LICENSE
@@ -48,7 +48,7 @@ InfoBeforeFile=..\..\README.md
 InfoAfterFile=post-install-info.txt
 
 ; Uninstall settings
-UninstallDisplayIcon={app}\icon.ico
+; UninstallDisplayIcon={app}\icon.ico  ; Will use default
 
 ; Architecture
 ArchitecturesAllowed=x64
@@ -76,18 +76,18 @@ Source: "..\..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\CHANGELOG.md"; DestDir: "{app}"; Flags: ignoreversion
 
-; Icon
-Source: "icon.ico"; DestDir: "{app}"; Flags: ignoreversion
+; Icon (optional - will use default if not present)
+; Source: "icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 ; Start Menu shortcuts
-Name: "{group}\{#MyAppName}"; Filename: "{app}\launch.bat"; IconFilename: "{app}\icon.ico"; Comment: "Start AI Gospel Parser"
-Name: "{group}\Stop {#MyAppName}"; Filename: "{app}\stop.bat"; IconFilename: "{app}\icon.ico"; Comment: "Stop AI Gospel Parser"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\launch.bat"; Comment: "Start AI Gospel Parser"
+Name: "{group}\Stop {#MyAppName}"; Filename: "{app}\stop.bat"; Comment: "Stop AI Gospel Parser"
 Name: "{group}\Open in Browser"; Filename: "http://localhost:3000"; Comment: "Open AI Gospel Parser in browser"
 Name: "{group}\Uninstall {#MyAppName}"; Filename: "{uninstallexe}"
 
 ; Desktop shortcut (optional)
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\launch.bat"; IconFilename: "{app}\icon.ico"; Tasks: desktopicon
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\launch.bat"; Tasks: desktopicon
 
 [Run]
 ; Run the installer after setup
