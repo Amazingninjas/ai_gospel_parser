@@ -38,16 +38,25 @@
 
 ### 🪟 Windows
 
-**[⬇️ Download Windows Installer](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.1/AI-Gospel-Parser-Windows-Installer-1.0.1.tar.gz)** (3.1 KB)
+**[⬇️ Download AI-Gospel-Parser-Setup-1.0.1.exe](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.1/AI-Gospel-Parser-Setup-1.0.1.exe)** (Professional Installer)
 
 **How to install:**
-1. Download and extract the archive
-2. **Double-click** `AI-Gospel-Parser-Installer.vbs`
-3. Click "Yes" when prompted for administrator permission
-4. Wait 10-15 minutes (first-time setup)
-5. Browser opens automatically!
+1. Download the `.exe` file
+2. **Double-click** to run the installer
+3. Follow the installation wizard
+4. Check "Install and start AI Gospel Parser now"
+5. Wait 5-10 minutes (first-time setup)
+6. Browser opens automatically!
 
-**That's it!** No PowerShell, no commands, no technical knowledge needed.
+**Professional Windows installer** with Start Menu shortcuts - just like any other Windows application!
+
+**After installation:**
+- 📌 Start Menu: Click "AI Gospel Parser" to launch
+- 🖥️ Desktop: Optional shortcut (if selected during install)
+- 🔄 On restart: Start Docker Desktop, then click "AI Gospel Parser" from Start Menu
+
+**Alternative (no .exe):**
+[Download VBScript Installer](https://github.com/Amazingninjas/ai_gospel_parser/releases/download/v1.0.1/AI-Gospel-Parser-Windows-Installer-1.0.1.tar.gz) (3.1 KB) - Extract and double-click `AI-Gospel-Parser-Installer.vbs`
 
 ---
 
@@ -93,6 +102,41 @@ All installers automatically:
 - ✅ Open http://localhost:3000 in your browser
 
 **Total time:** 10-15 minutes (mostly Docker installation on first run)
+
+---
+
+### 🔄 Using After Installation
+
+**First time:**
+- Installer starts everything automatically
+- Browser opens to http://localhost:3000
+- Application is ready to use!
+
+**On computer restart / next time:**
+
+1. **Start Docker Desktop** (if not already running)
+   - Windows: Look for Docker whale icon in system tray
+   - macOS: Look for Docker whale in menu bar
+   - Linux: Docker usually starts automatically
+
+2. **Launch the application:**
+   - **Windows:** Click "AI Gospel Parser" from Start Menu
+   - **macOS:** Click "AI Gospel Parser" from Applications or Launchpad
+   - **Linux:** Click "AI Gospel Parser" from application menu
+
+3. **Browser opens automatically** to http://localhost:3000
+
+**That's it!** The launcher is smart:
+- ✅ Checks if Docker is running (guides you if not)
+- ✅ Checks if containers are already running
+- ✅ Only starts containers if needed
+- ✅ Opens browser automatically
+
+**To stop the application:**
+- **Windows:** Click "Stop AI Gospel Parser" from Start Menu, or run `docker-compose down` in the app directory
+- **macOS/Linux:** Run `docker-compose down` in the app directory
+
+---
 
 ### 🆚 Why This is Better
 
