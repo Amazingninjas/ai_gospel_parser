@@ -90,8 +90,8 @@ Name: "{group}\Uninstall {#MyAppName}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\launch.bat"; Tasks: desktopicon
 
 [Run]
-; Run the installer after setup
-Filename: "{app}\install-windows.ps1"; Description: "Install and start AI Gospel Parser now"; Flags: postinstall shellexec skipifsilent runascurrentuser
+; Run the installer after setup (executes PowerShell script properly)
+Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -NoProfile -File ""{app}\install-windows.ps1"""; Description: "Install and start AI Gospel Parser now"; Flags: postinstall skipifsilent runasoriginaluser
 
 [UninstallRun]
 ; Stop Docker containers before uninstall
