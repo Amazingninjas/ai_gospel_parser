@@ -50,6 +50,24 @@
 
 **Professional Windows installer** with Start Menu shortcuts - just like any other Windows application!
 
+> ⚠️ **Windows Security Warning Expected**
+>
+> Windows will show "Windows protected your PC" or "Unknown publisher" warnings because the installer is not digitally signed (code signing certificates cost $200+/year).
+>
+> **This is safe!** The software is open source and virus-free.
+>
+> **To install:**
+> 1. Right-click the .exe → **Properties** → Check **"Unblock"** → **OK**
+> 2. Double-click to run → Click **"More info"** → **"Run anyway"**
+>
+> 📋 **[Full troubleshooting guide](INSTALLATION-TROUBLESHOOTING.md)** with step-by-step screenshots
+>
+> 🔒 **Verify integrity (optional):**
+> ```powershell
+> Get-FileHash AI-Gospel-Parser-Setup-1.0.1.exe -Algorithm SHA256
+> ```
+> Expected: `fbd94ebb35b0fa645b60f4c45bb937f979965e98a740d9bbeb6234d0c299eebc`
+
 **After installation:**
 - 📌 Start Menu: Click "AI Gospel Parser" to launch
 - 🖥️ Desktop: Optional shortcut (if selected during install)
