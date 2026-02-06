@@ -1,0 +1,56 @@
+# ============================================================================
+# GitHub Actions Workflow for Building Windows .exe Installer
+# ============================================================================
+# This file should be added to: .github/workflows/build-installer.yml
+#
+# TO ADD THIS WORKFLOW:
+# 1. Go to: https://github.com/Amazingninjas/ai_gospel_parser
+# 2. Click "Add file" → "Create new file"
+# 3. Name: .github/workflows/build-installer.yml
+# 4. Paste the content below (starting from "name: Build Windows Installer")
+# 5. Commit directly to main branch
+#
+# This allows GitHub to automatically build the .exe in the cloud!
+# ============================================================================
+
+name: Build Windows Installer
+
+on:
+  workflow_dispatch:  # Manual trigger via Actions tab
+  push:
+    tags:
+      - 'v*'  # Automatic trigger on version tags
+
+jobs:
+  build-windows-exe:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Inno Setup
+      run: |
+        choco install innosetup -y
+
+    - name: Build .exe installer
+      run: |
+        cd installers/windows
+        & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AI-Gospel-Parser-Setup
+        path: installers/windows/output/*.exe
+        if-no-files-found: error
+
+    - name: Create GitHub Release (if tagged)
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: installers/windows/output/*.exe
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

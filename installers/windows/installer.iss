@@ -61,8 +61,10 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-; Main installer scripts
-Source: "..\..\portable-installation\install-windows.ps1"; DestDir: "{app}"; Flags: ignoreversion
+; Post-installation script (runs after setup completes)
+Source: "install-after-setup.ps1"; DestDir: "{app}"; Flags: ignoreversion
+
+; Reference files (not strictly needed but included for completeness)
 Source: "..\..\portable-installation\docker-compose.yml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\portable-installation\.env.example"; DestDir: "{app}"; DestName: ".env"; Flags: ignoreversion
 Source: "..\..\portable-installation\README-SMART-INSTALLER.txt"; DestDir: "{app}"; Flags: ignoreversion isreadme
@@ -90,8 +92,8 @@ Name: "{group}\Uninstall {#MyAppName}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\launch.bat"; Tasks: desktopicon
 
 [Run]
-; Run the installer after setup (executes PowerShell script properly)
-Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -NoProfile -File ""{app}\install-windows.ps1"""; Description: "Install and start AI Gospel Parser now"; Flags: postinstall skipifsilent runasoriginaluser
+; Run the post-installation script (clones repo, checks Docker, starts app)
+Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -NoProfile -NoExit -File ""{app}\install-after-setup.ps1"""; Description: "Install and start AI Gospel Parser now"; Flags: postinstall skipifsilent
 
 [UninstallRun]
 ; Stop Docker containers before uninstall
