@@ -2,8 +2,6 @@
 # =====================================
 # Orchestrates backend (FastAPI) + frontend (React/Nginx)
 
-version: '3.8'
-
 services:
   # Backend API (FastAPI)
   backend:

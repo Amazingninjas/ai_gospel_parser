@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - Unreleased
+
+### Fixed
+- **Windows installer launcher bug**: Fixed launch.bat and stop.bat to run docker-compose from the correct directory (%USERPROFILE%\Documents\ai_gospel_parser) instead of Program Files installation directory
+- **Docker Compose warning**: Removed deprecated `version: '3.8'` field from docker-compose.yml
+
+## [1.0.1] - 2026-02-06
+
+### Added
+- **Professional Windows installer** (.exe) with Inno Setup
+- **Smart launcher scripts** that check Docker status and start only if needed
+- **Start Menu shortcuts** for easy access
+- **macOS and Linux installers** with native formats (.app, .desktop)
+- **Complete installer documentation** covering all platforms
+
+### Fixed
+- **PowerShell script syntax** - replaced Unicode symbols with ASCII for compatibility
+- **Line endings** - converted to CRLF for Windows batch files
+
 ## [1.0.0] - 2026-01-31
 
 ### Added
